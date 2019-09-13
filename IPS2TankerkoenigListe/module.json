@@ -1,0 +1,14 @@
+{
+  "id": "{6EAE7FDD-13F6-B27C-C5FB-84BF96F3006B}",
+  "name": "IPS2TankerkoenigListe",
+  "type": 3,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2TankerkoenigListe"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "I2TListe"
+}
