@@ -8,7 +8,7 @@
     "IPS2TankerkoenigIO"
   ],
   "parentRequirements": [],
-  "childRequirements": [],
-  "implemented": [],
+  "childRequirements": ["{3C01DDC5-7302-55A3-9F40-56B49A882572}"],
+  "implemented": ["{6ADD0473-D761-A2BF-63BE-CFE279089F5A}"],
   "prefix": "I2TIO"
 }
