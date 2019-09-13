@@ -7,8 +7,8 @@
   [
     "IPS2TankerkoenigListe"
   ],
-  "parentRequirements": [],
+  "parentRequirements": ["{6ADD0473-D761-A2BF-63BE-CFE279089F5A}"],
   "childRequirements": [],
-  "implemented": [],
+  "implemented": ["{3C01DDC5-7302-55A3-9F40-56B49A882572}"],
   "prefix": "I2TListe"
 }
