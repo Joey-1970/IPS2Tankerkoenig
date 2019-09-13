@@ -15,6 +15,10 @@
             	// Diese Zeile nicht löschen.
             	parent::Create();
  	    	$this->RegisterPropertyBoolean("Open", false);
+		$this->RegisterPropertyString("ApiKey", "");
+		$this->RegisterPropertyFloat("Lat", 0.0);
+		$this->RegisterPropertyFloat("Long", 0.0);
+		$this->RegisterPropertyFloat("Radius", 0.0);
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
         }
@@ -61,12 +65,7 @@
 	public function RequestAction($Ident, $Value) 
 	{
 		switch($Ident) {
-		case "Status":
-			$this->SetChannelStatus($Value);
-			break;
-		case "AutoReset":
-			SetValueInteger($this->GetIDForIdent("AutoReset"), $Value);
-			break;
+		
 		default:
 		    throw new Exception("Invalid Ident");
 		}
