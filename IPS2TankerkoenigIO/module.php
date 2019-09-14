@@ -61,6 +61,7 @@
 				$Lat = floatval($data->Lat);
 				$Long = floatval($data->Long);
 				$Radius = floatval($data->Radius);
+				$this->SendDebug("GetAreaInformation", $Lat.", ".$Long.", ".$Radius, 0);
 				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&Rad=".$Radius."&sort=dist&type=all&apikey=".$ApiKey);
 	 
 				break;
