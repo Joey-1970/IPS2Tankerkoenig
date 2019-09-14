@@ -61,7 +61,7 @@
 				$Lat = floatval($data->Lat);
 				$Long = floatval($data->Long);
 				$Rad = floatval($data->Rad);
-				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&Rad=".$rad."&sort=dist&type=all&apikey=".$ApiKey);
+				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&Rad=".$Rad."&sort=dist&type=all&apikey=".$ApiKey);
 	 
 				break;
 		}
