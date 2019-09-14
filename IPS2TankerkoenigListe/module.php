@@ -71,7 +71,7 @@
 		$Rad = GetValueFloat($this->GetIDForIdent("Radius"));
 		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Rad" => $Rad )));
-		$this->SendDebug("GetDataUpdate", $Result), 0);
+		$this->SendDebug("GetDataUpdate", $Result, 0);
 	}
 	
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
