@@ -56,6 +56,7 @@
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000);
+				$this->GetDataUpdate();
 			}
 			else {
 				$this->SetStatus(104);
