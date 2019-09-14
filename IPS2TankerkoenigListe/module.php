@@ -68,9 +68,9 @@
 	{
 		$Lat = $this->ReadPropertyFloat("Lat");
 		$Long = $this->ReadPropertyFloat("Long");
-		$Rad = $this->ReadPropertyFloat("Radius");
+		$Radius = $this->ReadPropertyFloat("Radius");
 		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
-			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Rad" => $Rad )));
+			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 		$this->SendDebug("GetDataUpdate", $Result, 0);
 	}
 	
