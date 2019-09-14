@@ -72,8 +72,43 @@
 		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 		$this->SendDebug("GetDataUpdate", $Result, 0);
+		// hier muss noch eine Fehlerbehandlung hin
+		$this->ShowResult($Result);
 	}
 	
+	private function ShowResult(string $Text)
+	{
+		$ResultArray = array();
+		$ResultArray = json_decode($Text);
+		$table = '<style type="text/css">';
+		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
+		$table .= "</style>";
+		$table .= '<table class="tg">';
+		$table .= "<tr>";
+		$table .= '<th class="tg-kv4b">Name</th>';
+		$table .= '<th class="tg-kv4b">Ort<br></th>';
+        	$table .= '<th class="tg-kv4b">Diesel<br></th>';
+        	$table .= '<th class="tg-kv4b">Offen<br></th>';
+        	//$table .= '<th class="tg-kv4b">Ort<br></th>';
+		$table .= '</tr>';
+		foreach($ResultArray->stations as $Stations) {
+			$table .= '<tr>';
+			$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
+			$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
+            	$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+            	If ($Stations->isOpen == true) {
+                	$table .= '<td class="tg-611x">'."Ja".'</td>';
+            	} else {
+                	$table .= '<td class="tg-611x">'."Nein".'</td>';
+            	}
+			$table .= '</tr>';
+		}
+		$table .= '</table>';
+		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationList"))) {
+			SetValueBoolean($this->GetIDForIdent("PetrolStationList"), $table);
+		}
+	}
+	    
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
 	{
 	        if (!IPS_VariableProfileExists($Name))
