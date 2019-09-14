@@ -106,7 +106,7 @@
 		}
 		$table .= '</table>';
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationList"))) {
-			GetValueString($this->GetIDForIdent("PetrolStationList"), $table);
+			SetValueString($this->GetIDForIdent("PetrolStationList"), $table);
 		}
 	}
 	    
