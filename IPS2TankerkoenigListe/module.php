@@ -21,9 +21,9 @@
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
 		$this->RegisterPropertyBoolean("Diesel", false);
-		$this->RegisterPropertyBoolean("E5", false);
-		$this->RegisterPropertyBoolean("E10", false);
-		$this->RegisterPropertyBoolean("ShowOnlyOpen", false);
+		$this->RegisterPropertyBoolean("E5", true);
+		$this->RegisterPropertyBoolean("E10", true);
+		$this->RegisterPropertyBoolean("ShowOnlyOpen", true);
 		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
@@ -99,16 +99,34 @@
 		$table .= "<tr>";
 		$table .= '<th class="tg-kv4b">Name</th>';
 		$table .= '<th class="tg-kv4b">Ort<br></th>';
-        	$table .= '<th class="tg-kv4b">Diesel<br></th>';
-        	$table .= '<th class="tg-kv4b">Offen<br></th>';
-        	//$table .= '<th class="tg-kv4b">Ort<br></th>';
+		If ($this->ReadPropertyBoolean("Diesel") == true) { 
+        		$table .= '<th class="tg-kv4b">Diesel<br></th>';
+		}
+		If ($this->ReadPropertyBoolean("E5") == true) { 
+        		$table .= '<th class="tg-kv4b">Super E5<br></th>';
+		}
+		If ($this->ReadPropertyBoolean("E10") == true) { 
+        		$table .= '<th class="tg-kv4b">Super E10<br></th>';
+		}
+        	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == true) { 
+			$table .= '<th class="tg-kv4b">Offen<br></th>';
+		}
+		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
 		foreach($ResultArray->stations as $Stations) {
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
 				$table .= '<tr>';
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
-				$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+				If ($this->ReadPropertyBoolean("Diesel") == true) {
+					$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+				}
+				If ($this->ReadPropertyBoolean("E5") == true) {
+					$table .= '<td class="tg-611x">'.$Stations->e5." €".'</td>';
+				}
+				If ($this->ReadPropertyBoolean("E10") == true) {
+					$table .= '<td class="tg-611x">'.$Stations->e10." €".'</td>';
+				}
 				If ($Stations->isOpen == true) {
 					$table .= '<td class="tg-611x">'."Ja".'</td>';
 				} else {
@@ -122,7 +140,6 @@
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 					$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
-					$table .= '<td class="tg-611x">'."Ja".'</td>';
 					$table .= '</tr>';
 				}
 			}
