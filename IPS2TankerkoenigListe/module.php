@@ -20,6 +20,9 @@
 		$this->RegisterPropertyFloat("Radius", 0.0);
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
+		$this->RegisterPropertyBoolean("Diesel", false);
+		$this->RegisterPropertyBoolean("E5", false);
+		$this->RegisterPropertyBoolean("E10", false);
 		$this->RegisterPropertyBoolean("ShowOnlyOpen", false);
 		
 		// Status-Variablen anlegen
@@ -42,7 +45,12 @@
 		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung");
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "s");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
-		$arrayElements[] = array("name" => "ShowOnlyOpen", "type" => "CheckBox",  "caption" => "Nur geöffnete Tankstellen anzeigen"); 
+		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Sorten");
+		$arrayElements[] = array("type" => "CheckBox", "name" => "Diesel", "caption" => "Diesel"); 
+		$arrayElements[] = array("type" => "CheckBox", "name" => "E5", "caption" => "Super E5");
+		$arrayElements[] = array("type" => "CheckBox", "name" => "E10", "caption" => "Super E10");
+		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
+		$arrayElements[] = array("type" => "CheckBox", "name" => "ShowOnlyOpen", "caption" => "Nur geöffnete Tankstellen anzeigen"); 
 		$arrayActions = array();
 		$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
 		
