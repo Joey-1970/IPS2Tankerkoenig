@@ -53,7 +53,6 @@
             	parent::ApplyChanges();
 		
 		If (IPS_GetKernelRunlevel() == 10103) {	
-		
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000);
@@ -67,6 +66,11 @@
 	// Beginn der Funktionen
 	public function GetDataUpdate()
 	{
+		$Lat = GetValueFloat($this->GetIDForIdent("Lat"));
+		$Long = GetValueFloat($this->GetIDForIdent("Long"));
+		$Rad = GetValueFloat($this->GetIDForIdent("Radius"));
+		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Rad" => $Rat )));
 		
 	}
 	
