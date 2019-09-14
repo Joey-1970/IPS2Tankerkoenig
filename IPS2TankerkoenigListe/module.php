@@ -15,7 +15,6 @@
             	// Diese Zeile nicht löschen.
             	parent::Create();
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
- 	    	$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyFloat("Lat", 0.0);
 		$this->RegisterPropertyFloat("Long", 0.0);
 		$this->RegisterPropertyFloat("Radius", 0.0);
@@ -31,8 +30,11 @@
 		$arrayStatus[] = array("code" => 104, "icon" => "inactive", "caption" => "Instanz ist inaktiv");
 				
 		$arrayElements = array(); 
-		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv"); 
- 
+		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Lat", "caption" => "Latitude", "digits" => 4);
+		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Long", "caption" => "Longitude", "digits" => 4);
+		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius", "digits" => 1);
+		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung");
+		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "s");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		
 		$arrayActions = array();
