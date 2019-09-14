@@ -20,6 +20,7 @@
 		$this->RegisterPropertyFloat("Radius", 0.0);
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
+		$this->RegisterPropertyBoolean("ShowOnlyOpen", false);
 		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
@@ -41,7 +42,7 @@
 		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung");
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "s");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
-		
+		$arrayElements[] = array("name" => "ShowOnlyOpen", "type" => "CheckBox",  "caption" => "Nur geöffnete Tankstellen anzeigen"); 
 		$arrayActions = array();
 		$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
 		
@@ -95,16 +96,29 @@
         	//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
 		foreach($ResultArray->stations as $Stations) {
-			$table .= '<tr>';
-			$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
-			$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
-            	$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
-            	If ($Stations->isOpen == true) {
-                	$table .= '<td class="tg-611x">'."Ja".'</td>';
-            	} else {
-                	$table .= '<td class="tg-611x">'."Nein".'</td>';
-            	}
-			$table .= '</tr>';
+			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
+				$table .= '<tr>';
+				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
+				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
+				$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+				If ($Stations->isOpen == true) {
+					$table .= '<td class="tg-611x">'."Ja".'</td>';
+				} else {
+					$table .= '<td class="tg-611x">'."Nein".'</td>';
+				}
+				$table .= '</tr>';
+			}
+			else {
+				If ($Stations->isOpen == true) {
+					$table .= '<tr>';
+					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
+					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
+					$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+					$table .= '<td class="tg-611x">'."Ja".'</td>';
+					$table .= '</tr>';
+				}
+			}
+				
 		}
 		$table .= '</table>';
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationList"))) {
