@@ -20,6 +20,9 @@
 		$this->RegisterPropertyFloat("Radius", 0.0);
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
+		
+		// Profil anlegen
+		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
         }
  	
 	public function GetConfigurationForm() 
@@ -49,32 +52,23 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 		
-		// Profil anlegen
-		
-		
-		
 		If (IPS_GetKernelRunlevel() == 10103) {	
 		
-			If ($this->ReadPropertyBoolean("Open") == true) {
+			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
+				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000);
 			}
 			else {
 				$this->SetStatus(104);
 			}
 		}
 	}
-	
-	public function RequestAction($Ident, $Value) 
-	{
-		switch($Ident) {
-		
-		default:
-		    throw new Exception("Invalid Ident");
-		}
-	}
 	    
 	// Beginn der Funktionen
-	
+	public function GetDataUpdate()
+	{
+		
+	}
 	
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
 	{
@@ -93,6 +87,16 @@
 	        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);    
 	}    
 	    
-
+	protected function HasActiveParent()
+    	{
+		$Instance = @IPS_GetInstance($this->InstanceID);
+		if ($Instance['ConnectionID'] > 0)
+		{
+			$Parent = IPS_GetInstance($Instance['ConnectionID']);
+			if ($Parent['InstanceStatus'] == 102)
+			return true;
+		}
+        return false;
+    	}  
 }
 ?>
