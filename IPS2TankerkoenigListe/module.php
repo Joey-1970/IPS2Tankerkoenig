@@ -21,8 +21,10 @@
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
 		
-		// Profil anlegen
+		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
+		
+		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 20);
         }
  	
 	public function GetConfigurationForm() 
@@ -108,6 +110,7 @@
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationList"))) {
 			SetValueString($this->GetIDForIdent("PetrolStationList"), $table);
 		}
+		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	    
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
