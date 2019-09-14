@@ -16,7 +16,6 @@
             	parent::Create();
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
  	    	$this->RegisterPropertyBoolean("Open", false);
-		$this->RegisterPropertyString("ApiKey", "");
 		$this->RegisterPropertyFloat("Lat", 0.0);
 		$this->RegisterPropertyFloat("Long", 0.0);
 		$this->RegisterPropertyFloat("Radius", 0.0);
