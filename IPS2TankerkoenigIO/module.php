@@ -49,6 +49,24 @@
 		}
 	}
 	
+	public function ForwardData($JSONString) 
+	 {
+	 	// Empfangene Daten von der Device Instanz
+	    	$data = json_decode($JSONString);
+	    	$Result = -999;
+	 	switch ($data->Function) {
+		    	// GPIO Kommunikation
+			case "GetAreaInformation":
+				$ApiKey = $this->ReadPropertyString("ApiKey");
+				$Lat = floatval($data->Lat);
+				$Long = floatval($data->Long);
+				$Rad = floatval($data->Rad);
+				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&Rad=".$rad."&sort=dist&type=all&apikey=".$ApiKey);
+	 
+				break;
+		}
+	return $Result;
+	}
 	    
 	// Beginn der Funktionen
 	
