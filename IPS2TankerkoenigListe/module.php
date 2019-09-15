@@ -108,7 +108,7 @@
 		$ResultArray = json_decode($Text);
 		$ColorCode = "#00FF00";
 		// Fehlerbehandlung
-		If (boolval($Stations->ok) == false) {
+		If (boolval($ResultArray->ok) == false) {
 			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung!", 0);
 			return;
 		}
