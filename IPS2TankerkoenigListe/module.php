@@ -97,6 +97,7 @@
 		$table .= "</style>";
 		$table .= '<table class="tg">';
 		$table .= "<tr>";
+		$table .= '<th class="tg-kv4b">Marke</th>';
 		$table .= '<th class="tg-kv4b">Name</th>';
 		$table .= '<th class="tg-kv4b">Ort<br></th>';
 		If ($this->ReadPropertyBoolean("Diesel") == true) { 
@@ -116,6 +117,7 @@
 		foreach($ResultArray->stations as $Stations) {
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
 				$table .= '<tr>';
+				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
@@ -137,6 +139,7 @@
 			else {
 				If ($Stations->isOpen == true) {
 					$table .= '<tr>';
+					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 					If ($this->ReadPropertyBoolean("Diesel") == true) {
