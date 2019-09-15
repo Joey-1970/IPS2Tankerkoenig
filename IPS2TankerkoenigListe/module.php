@@ -138,7 +138,7 @@
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
-					If ($Stations->diesel == $Diesel) {
+					If (floatval($Stations->diesel) == $Diesel) {
 						$table .= '<td class="tg-611x"> <font color="green">'.$Stations->diesel." €".'</font> </td>';
 					}
 					else {
