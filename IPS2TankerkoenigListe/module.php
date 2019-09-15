@@ -17,10 +17,10 @@
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyFloat("Lat", 0.0);
 		$this->RegisterPropertyFloat("Long", 0.0);
-		$this->RegisterPropertyFloat("Radius", 0.0);
+		$this->RegisterPropertyFloat("Radius", 5.0);
 		$this->RegisterPropertyInteger("Timer_1", 60);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
-		$this->RegisterPropertyBoolean("Diesel", false);
+		$this->RegisterPropertyBoolean("Diesel", true);
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
 		$this->RegisterPropertyBoolean("ShowOnlyOpen", true);
@@ -67,7 +67,12 @@
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000);
-				$this->GetDataUpdate();
+				If (($this->ReadPropertyFloat("Lat") <> 0) AND ($this->ReadPropertyFloat("Long") <> 0) AND ($this->ReadPropertyFloat("Radius") > 0)) {
+					$this->GetDataUpdate();
+				}
+				else {
+					$this->SendDebug("GetDataUpdate", "Keine Koordinaten verfügbar!", 0);
+				}
 			}
 			else {
 				$this->SetStatus(104);
@@ -81,14 +86,19 @@
 		$Lat = $this->ReadPropertyFloat("Lat");
 		$Long = $this->ReadPropertyFloat("Long");
 		$Radius = $this->ReadPropertyFloat("Radius");
-		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
-			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
-		If ($Result <> false) {
-			$this->SendDebug("GetDataUpdate", $Result, 0);
-			$this->ShowResult($Result);
+		If (($Lat <> 0) AND ($Long <> 0) AND ($Radius > 0)) {
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
+			If ($Result <> false) {
+				$this->SendDebug("GetDataUpdate", $Result, 0);
+				$this->ShowResult($Result);
+			}
+			else {
+				$this->SendDebug("GetDataUpdate", "Fehler bei der Datenermittlung!", 0);
+			}
 		}
 		else {
-			$this->SendDebug("GetDataUpdate", "Fehler bei der Datenermittlung!", 0);
+			$this->SendDebug("GetDataUpdate", "Keine Koordinaten verfügbar!", 0);
 		}
 	}
 	
