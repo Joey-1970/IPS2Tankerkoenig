@@ -147,10 +147,20 @@
 					}
 				}
 				If ($this->ReadPropertyBoolean("E5") == true) {
-					$table .= '<td class="tg-611x">'.$Stations->e5." €".'</td>';
+					If (floatval($Stations->e5) == $E5) {
+						$table .= '<td class="tg-611x"> <font color=".$ColorCode.">'.$Stations->e5." €".'</font> </td>';
+					}
+					else {
+						$table .= '<td class="tg-611x"> <font color="white">'.$Stations->e5." €".'</font> </td>';
+					}
 				}
 				If ($this->ReadPropertyBoolean("E10") == true) {
-					$table .= '<td class="tg-611x">'.$Stations->e10." €".'</td>';
+					If (floatval($Stations->e10) == $E10) {
+						$table .= '<td class="tg-611x"> <font color=".$ColorCode.">'.$Stations->e10." €".'</font> </td>';
+					}
+					else {
+						$table .= '<td class="tg-611x"> <font color="white">'.$Stations->e10." €".'</font> </td>';
+					}
 				}
 				If ($Stations->isOpen == true) {
 					$table .= '<td class="tg-611x">'."Ja".'</td>';
