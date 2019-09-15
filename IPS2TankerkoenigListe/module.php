@@ -92,6 +92,7 @@
 	{
 		$ResultArray = array();
 		$ResultArray = json_decode($Text);
+		$ColorCode = "#00FF00";
 		// Preise untersuchen
 		$Diesel = 100;
 		$E5 = 100;
@@ -139,7 +140,7 @@
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
 					If (floatval($Stations->diesel) == $Diesel) {
-						$table .= '<td class="tg-611x"> <font color="green">'.$Stations->diesel." €".'</font> </td>';
+						$table .= '<td class="tg-611x"> <font color=".$ColorCode.">'.$Stations->diesel." €".'</font> </td>';
 					}
 					else {
 						$table .= '<td class="tg-611x"> <font color="white">'.$Stations->diesel." €".'</font> </td>';
