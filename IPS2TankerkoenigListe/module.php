@@ -103,7 +103,7 @@
 			If ($E5 > floatval($Stations->e5)) {
 				$E5 = floatval($Stations->e5);
 			}
-			If ($E510 > floatval($Stations->e10)) {
+			If ($E10 > floatval($Stations->e10)) {
 				$E10 = floatval($Stations->e10);
 			}
 		}
