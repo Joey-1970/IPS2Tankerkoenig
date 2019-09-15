@@ -108,7 +108,7 @@
 		If ($this->ReadPropertyBoolean("E10") == true) { 
         		$table .= '<th class="tg-kv4b">Super E10<br></th>';
 		}
-        	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == true) { 
+        	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
 		}
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
