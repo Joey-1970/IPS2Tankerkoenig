@@ -139,7 +139,15 @@
 					$table .= '<tr>';
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
-					$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+					If ($this->ReadPropertyBoolean("Diesel") == true) {
+						$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</td>';
+					}
+					If ($this->ReadPropertyBoolean("E5") == true) {
+						$table .= '<td class="tg-611x">'.$Stations->e5." €".'</td>';
+					}
+					If ($this->ReadPropertyBoolean("E10") == true) {
+						$table .= '<td class="tg-611x">'.$Stations->e10." €".'</td>';
+					}
 					$table .= '</tr>';
 				}
 			}
