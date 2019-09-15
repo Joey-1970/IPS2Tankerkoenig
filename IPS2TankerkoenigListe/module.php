@@ -98,13 +98,13 @@
 		$E5 = 100;
 		$E10 = 100;
 		foreach($ResultArray->stations as $Stations) {
-			If ($Diesel > floatval($Stations->diesel)) {
+			If (($Diesel > floatval($Stations->diesel)) AND (floatval($Stations->diesel) > 0)) {
 				$Diesel = floatval($Stations->diesel);
 			}
-			If ($E5 > floatval($Stations->e5)) {
+			If (($E5 > floatval($Stations->e5)) AND (floatval($Stations->e5) > 0)) {
 				$E5 = floatval($Stations->e5);
 			}
-			If ($E10 > floatval($Stations->e10)) {
+			If (($E10 > floatval($Stations->e10)) AND (floatval($Stations->e10) > 0)) {
 				$E10 = floatval($Stations->e10);
 			}
 		}
