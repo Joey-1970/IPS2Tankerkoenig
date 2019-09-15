@@ -83,9 +83,13 @@
 		$Radius = $this->ReadPropertyFloat("Radius");
 		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 			"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
-		$this->SendDebug("GetDataUpdate", $Result, 0);
-		// hier muss noch eine Fehlerbehandlung hin
-		$this->ShowResult($Result);
+		If ($Result <> false) {
+			$this->SendDebug("GetDataUpdate", $Result, 0);
+			$this->ShowResult($Result);
+		}
+		else {
+			$this->SendDebug("GetDataUpdate", "Fehler bei der Datenermittlung!", 0);
+		}
 	}
 	
 	private function ShowResult(string $Text)
@@ -93,6 +97,11 @@
 		$ResultArray = array();
 		$ResultArray = json_decode($Text);
 		$ColorCode = "#00FF00";
+		// Fehlerbehandlung
+		If (boolval($Stations->ok) == false) {
+			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung!", 0);
+			return;
+		}
 		// Preise untersuchen
 		$Diesel = 100;
 		$E5 = 100;
