@@ -92,6 +92,23 @@
 	{
 		$ResultArray = array();
 		$ResultArray = json_decode($Text);
+		// Preise untersuchen
+		$Diesel = 100;
+		$E5 = 100;
+		$E10 = 100;
+		foreach($ResultArray->stations as $Stations) {
+			If ($Diesel > floatval($Stations->diesel)) {
+				$Diesel = floatval($Stations->diesel);
+			}
+			If ($E5 > floatval($Stations->e5)) {
+				$E5 = floatval($Stations->e5);
+			}
+			If ($E510 > floatval($Stations->e10)) {
+				$E10 = floatval($Stations->e10);
+			}
+		}
+		$this->SendDebug("ShowResult", "Diesel: ".$Diesel." E5: ".$E5." E10: ".$E10, 0);
+		// Tabelle aufbauen
 		$table = '<style type="text/css">';
 		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
 		$table .= "</style>";
