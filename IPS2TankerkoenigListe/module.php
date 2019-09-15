@@ -140,10 +140,10 @@
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
 					If (floatval($Stations->diesel) == $Diesel) {
-						$table .= '<td class="tg-611x"> <font color=".$ColorCode.">'.$Stations->diesel." €".'</font> </td>';
+						$table .= '<td class="tg-611x"> <font color='.$ColorCode.'>'.$Stations->diesel." €".'</font> </td>';
 					}
 					else {
-						$table .= '<td class="tg-611x"> <font color="white">'.$Stations->diesel." €".'</font> </td>';
+						$table .= '<td class="tg-611x">'.$Stations->diesel." €".'</font> </td>';
 					}
 				}
 				If ($this->ReadPropertyBoolean("E5") == true) {
