@@ -149,6 +149,7 @@
         	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
 		}
+		$table .= '<th class="tg-kv4b">ID kopieren<br></th>';
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
 		foreach($ResultArray->stations as $Stations) {
@@ -186,6 +187,7 @@
 				} else {
 					$table .= '<td class="tg-611x">'."Nein".'</td>';
 				}
+				$table .= '<button type="button" id="ID">...</button>';
 				$table .= '</tr>';
 			}
 			else {
@@ -218,11 +220,13 @@
 							$table .= '<td class="tg-611x">'.$Stations->e10." €".'</font> </td>';
 						}
 					}
+					$table .= '<button type="button" id="ID">...</button>';
 					$table .= '</tr>';
 				}
 			}
 				
 		}
+		
 		$table .= '</table>';
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationList"))) {
 			SetValueString($this->GetIDForIdent("PetrolStationList"), $table);
