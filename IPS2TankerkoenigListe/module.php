@@ -187,7 +187,7 @@
 				} else {
 					$table .= '<td class="tg-611x">'."Nein".'</td>';
 				}
-				$table .= '<button type="button" id="ID">...</button>';
+				$table .= '<td class="tg-611x"><button type="button" id="ID">...</button></td>';
 				$table .= '</tr>';
 			}
 			else {
@@ -220,7 +220,7 @@
 							$table .= '<td class="tg-611x">'.$Stations->e10." €".'</font> </td>';
 						}
 					}
-					$table .= '<button type="button" id="ID">...</button>';
+					$table .= '<td class="tg-611x"><button type="button" id="ID">...</button></td>';
 					$table .= '</tr>';
 				}
 			}
