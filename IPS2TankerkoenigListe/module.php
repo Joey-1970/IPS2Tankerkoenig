@@ -109,7 +109,7 @@
 		$ColorCode = "#00FF00";
 		// Fehlerbehandlung
 		If (boolval($ResultArray->ok) == false) {
-			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung!", 0);
+			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
 			return;
 		}
 		// Preise untersuchen
