@@ -190,7 +190,7 @@
 				} else {
 					$table .= '<td class="tg-611x">'."Nein".'</td>';
 				}
-				$StationID = 12345;
+				$StationID = $Stations->id;
 				$table .= '<td class="tg-611x"><button type="button" alt="Details" id="ID">...</button> onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"</td>';
 				$table .= '</tr>';
 			}
@@ -224,7 +224,9 @@
 							$table .= '<td class="tg-611x">'.$Stations->e10." €".'</font> </td>';
 						}
 					}
-					$table .= '<td class="tg-611x"><button type="button" id="ID">...</button></td>';
+					$StationID = $Stations->id;
+					$table .= '<td class="tg-611x"><button type="button" alt="Details" id="ID">...</button> onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"</td>';
+					//$table .= '<td class="tg-611x"><button type="button" id="ID">...</button></td>';
 					$table .= '</tr>';
 				}
 			}
