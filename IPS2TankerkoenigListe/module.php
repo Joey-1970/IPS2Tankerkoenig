@@ -25,6 +25,9 @@
 		$this->RegisterPropertyBoolean("E10", true);
 		$this->RegisterPropertyBoolean("ShowOnlyOpen", true);
 		
+		// Webhook einrichten
+		$this->RegisterHook("/hook/IPS2TankerkoenigListe_".$this->InstanceID);
+		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
 		
@@ -233,6 +236,35 @@
 		}
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
+	
+	protected function ProcessHookData() 
+	{		
+		if ((isset($_GET["Source"]) ) AND (isset($_GET["Index"])) ){
+			
+			$Source = $_GET["Source"];
+			$Index = $_GET["Index"];
+			$SRef = $_GET["SRef"];
+			switch($Source) {
+			case "EPGlist_Data_A":
+			    	//IPS_LogMessage("IPS2Enigma","WebHookData - Source: ".$Source." Index: ".$Index);
+				If (($this->ReadPropertyBoolean("Open") == true) AND ($this->Get_Powerstate() == true)) {
+					// Spalte A					
+					//$this->Zap($SRef);
+					//$this->Get_EPGUpdate();
+				}
+				break;
+			case "EPGlist_Data_D":
+			    	//IPS_LogMessage("IPS2Enigma","WebHookData - Source: ".$Source." Index: ".$Index);
+				break;
+			case "Movielist_Play":
+				If (($this->ReadPropertyBoolean("Open") == true) AND ($this->Get_Powerstate() == true)) {
+					//$this->MoviePlay($SRef);
+				}
+				break;
+			}
+			
+		}
+	}    
 	    
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
 	{
@@ -250,6 +282,28 @@
 	        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
 	        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);    
 	}    
+	
+	private function RegisterHook($WebHook) 
+	{ 
+		$ids = IPS_GetInstanceListByModuleID("{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}"); 
+		if(sizeof($ids) > 0) { 
+			$hooks = json_decode(IPS_GetProperty($ids[0], "Hooks"), true); 
+			$found = false; 
+			foreach($hooks as $index => $hook) { 
+				if($hook['Hook'] == $WebHook) { 
+					if($hook['TargetID'] == $this->InstanceID) 
+						return; 
+					$hooks[$index]['TargetID'] = $this->InstanceID; 
+					$found = true; 
+				} 
+			} 
+			if(!$found) { 
+				$hooks[] = Array("Hook" => $WebHook, "TargetID" => $this->InstanceID); 
+			} 
+			IPS_SetProperty($ids[0], "Hooks", json_encode($hooks)); 
+			IPS_ApplyChanges($ids[0]); 
+		} 
+	}     
 	    
 	protected function HasActiveParent()
     	{
