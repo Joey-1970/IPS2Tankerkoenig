@@ -32,6 +32,8 @@
 		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
 		
 		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 20);
+		
+		$this->RegisterVariableString("PetrolStationDetail", "Details", "~HTMLBox", 30);
         }
  	
 	public function GetConfigurationForm() 
@@ -247,6 +249,42 @@
 			
 		}
 	}    
+	
+	private function GetStationDetails(string $StationID)
+	{
+		If (strlen($ID) > 0)) {
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "GetDetailInformation", "InstanceID" => $this->InstanceID, "ID" => $ID)));
+			If ($Result <> false) {
+				$this->SendDebug("GetStationDetails", $Result, 0);
+				$this->ShowDetails($Result);
+			}
+			else {
+				$this->SendDebug("GetStationDetails", "Fehler bei der Datenermittlung!", 0);
+			}
+		}
+		else {
+			$this->SendDebug("GetStationDetails", "Stations ID fehlerhaft!", 0);
+		}
+	}    
+	
+	private function ShowDetails(string $Text)
+	{
+		$ResultArray = array();
+		$ResultArray = json_decode($Text);
+		$ColorCode = "#00FF00";
+		// Fehlerbehandlung
+		If (boolval($ResultArray->ok) == false) {
+			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
+			return;
+		} 
+		
+		$table = $Text;
+		
+		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationDetail"))) {
+			SetValueString($this->GetIDForIdent("PetrolStationDetail"), $table);
+		}
+	}
 	    
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
 	{
