@@ -152,7 +152,7 @@
         	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
 		}
-		$table .= '<th class="tg-kv4b">ID kopieren<br></th>';
+		$table .= '<th class="tg-kv4b"Details<br></th>';
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
 		foreach($ResultArray->stations as $Stations) {
@@ -190,7 +190,8 @@
 				} else {
 					$table .= '<td class="tg-611x">'."Nein".'</td>';
 				}
-				$table .= '<td class="tg-611x"><button type="button" id="ID">...</button></td>';
+				$StationID = 12345;
+				$table .= '<td class="tg-611x"><button type="button" alt="Details" id="ID">...</button> onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"</td>';
 				$table .= '</tr>';
 			}
 			else {
@@ -239,29 +240,9 @@
 	
 	protected function ProcessHookData() 
 	{		
-		if ((isset($_GET["Source"]) ) AND (isset($_GET["Index"])) ){
-			
-			$Source = $_GET["Source"];
-			$Index = $_GET["Index"];
-			$SRef = $_GET["SRef"];
-			switch($Source) {
-			case "EPGlist_Data_A":
-			    	//IPS_LogMessage("IPS2Enigma","WebHookData - Source: ".$Source." Index: ".$Index);
-				If (($this->ReadPropertyBoolean("Open") == true) AND ($this->Get_Powerstate() == true)) {
-					// Spalte A					
-					//$this->Zap($SRef);
-					//$this->Get_EPGUpdate();
-				}
-				break;
-			case "EPGlist_Data_D":
-			    	//IPS_LogMessage("IPS2Enigma","WebHookData - Source: ".$Source." Index: ".$Index);
-				break;
-			case "Movielist_Play":
-				If (($this->ReadPropertyBoolean("Open") == true) AND ($this->Get_Powerstate() == true)) {
-					//$this->MoviePlay($SRef);
-				}
-				break;
-			}
+		if (isset($_GET["StationID"])) {
+			$StationID = $_GET["StationID"];
+			$this->SendDebug("ProcessHookData", "StationID: ".$StationID, 0);
 			
 		}
 	}    
