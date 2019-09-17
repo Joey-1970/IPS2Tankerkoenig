@@ -65,8 +65,8 @@
 				break;
 			case "GetDetailInformation":
 				$ApiKey = $this->ReadPropertyString("ApiKey");
-				$ID = $data->ID);
-				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/detail.php?id=".$ID."&apikey=".$ApiKey);
+				$StationID = $data->StationID);
+				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/detail.php?id=".$StationID."&apikey=".$ApiKey);
 				break;
 		}
 	return $Result;
