@@ -191,7 +191,7 @@
 					$table .= '<td class="tg-611x">'."Nein".'</td>';
 				}
 				$StationID = $Stations->id;
-				$table .= '<td class="tg-611x"><button type="button" alt="Details" id="ID">...</button> onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"</td>';
+				$table .= '<td class="tg-611x"> <button type="button" alt="Details" onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"id="ID">...</button> </td>';
 				$table .= '</tr>';
 			}
 			else {
