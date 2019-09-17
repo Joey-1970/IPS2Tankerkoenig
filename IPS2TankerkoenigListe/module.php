@@ -246,7 +246,7 @@
 		if (isset($_GET["StationID"])) {
 			$StationID = $_GET["StationID"];
 			$this->SendDebug("ProcessHookData", "StationID: ".$StationID, 0);
-			
+			$this->GetStationDetails($StationID);
 		}
 	}    
 	
