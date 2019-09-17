@@ -254,7 +254,7 @@
 	{
 		If (strlen($ID) > 0)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
-				"Function" => "GetDetailInformation", "InstanceID" => $this->InstanceID, "ID" => $ID)));
+				"Function" => "GetDetailInformation", "InstanceID" => $this->InstanceID, "ID" => $ID));
 			If ($Result <> false) {
 				$this->SendDebug("GetStationDetails", $Result, 0);
 				$this->ShowDetails($Result);
