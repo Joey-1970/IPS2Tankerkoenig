@@ -154,7 +154,7 @@
         	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
 		}
-		$table .= '<th class="tg-kv4b"Details<br></th>';
+		$table .= '<th class="tg-kv4b">Details<br></th>';
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
 		foreach($ResultArray->stations as $Stations) {
