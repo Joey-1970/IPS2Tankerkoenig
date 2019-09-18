@@ -18,7 +18,7 @@
 		$this->RegisterPropertyFloat("Lat", 0.0);
 		$this->RegisterPropertyFloat("Long", 0.0);
 		$this->RegisterPropertyFloat("Radius", 5.0);
-		$this->RegisterPropertyInteger("Timer_1", 60);
+		$this->RegisterPropertyInteger("Timer_1", 10);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
 		$this->RegisterPropertyBoolean("Diesel", true);
 		$this->RegisterPropertyBoolean("E5", true);
@@ -47,8 +47,8 @@
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Lat", "caption" => "Latitude", "digits" => 4);
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Long", "caption" => "Longitude", "digits" => 4);
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius", "digits" => 1);
-		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung");
-		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "s");
+		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung (gemäß Tankerkönig.de Minumum 10 Minuten)");
+		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "min");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Sorten");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "Diesel", "caption" => "Diesel"); 
@@ -56,6 +56,9 @@
 		$arrayElements[] = array("type" => "CheckBox", "name" => "E10", "caption" => "Super E10");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "ShowOnlyOpen", "caption" => "Nur geöffnete Tankstellen anzeigen"); 
+		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
+		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/'");
+
 		$arrayActions = array();
 		$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
 		
@@ -71,7 +74,7 @@
 		If (IPS_GetKernelRunlevel() == 10103) {	
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
-				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000);
+				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
 				If (($this->ReadPropertyFloat("Lat") <> 0) AND ($this->ReadPropertyFloat("Long") <> 0) AND ($this->ReadPropertyFloat("Radius") > 0)) {
 					$this->GetDataUpdate();
 				}
