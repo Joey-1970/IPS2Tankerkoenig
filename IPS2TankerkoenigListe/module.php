@@ -288,6 +288,17 @@
 			SetValueString($this->GetIDForIdent("PetrolStationDetail"), $table);
 		}
 	}
+	
+	//    <iframe style="border: 1px solid black;" 
+        //src="http://www.openstreetmap.org/exportembed.html?bbox=10.676613450050354%2C53.86523244317649%2C10.680765509605408%2C53.867120905651895&layer=mapnik"
+        // height="350" width="425" 
+        // frameborder="0" marginwidth="0" marginheight="0" 
+        // scrolling="no">
+//</iframe>
+//<small><a href="http://www.openstreetmap.org/#map=18/53.86618/10.67869">Größere Karte anzeigen</a></small>
+
+ 
+	    
 	    
 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
 	{
