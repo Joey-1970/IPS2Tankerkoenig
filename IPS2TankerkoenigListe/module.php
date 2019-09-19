@@ -154,13 +154,13 @@
 		$E5AVG = array_sum($E5Array) / count($E5Array);
 		$E10AVG = array_sum($E10Array) / count($E10Array);
 		If ($DieselAVG <> GetValueFloat($this->GetIDForIdent("Diesel"))) {
-			SetValueStringFloat($this->GetIDForIdent("Diesel"), $DieselAVG);
+			SetValueFloat($this->GetIDForIdent("Diesel"), $DieselAVG);
 		}
 		If ($E5AVG <> GetValueFloat($this->GetIDForIdent("E5"))) {
-			SetValueStringFloat($this->GetIDForIdent("E5"), $E5AVG);
+			SetValueFloat($this->GetIDForIdent("E5"), $E5AVG);
 		}
 		If ($E10AVG <> GetValueFloat($this->GetIDForIdent("E10"))) {
-			SetValueStringFloat($this->GetIDForIdent("E10"), $E10AVG);
+			SetValueFloat($this->GetIDForIdent("E10"), $E10AVG);
 		}
 		// Tabelle aufbauen
 		$table = '<style type="text/css">';
