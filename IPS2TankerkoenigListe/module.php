@@ -307,7 +307,16 @@
 			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
 			return;
 		} 
+		// Tabelle aufbauen
+		$table = '<style type="text/css">';
+		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
+		$table .= "</style>";
+		$table .= '<table class="tg">';
+		$table .= "<tr>";
+		$table .= '<th class="tg-kv4b">Detaildaten</th>';
 		
+		
+		$table .= '</table>';
 		$table = $Text;
 		
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationDetail"))) {
