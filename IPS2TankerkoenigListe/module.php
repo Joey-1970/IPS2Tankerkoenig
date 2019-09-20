@@ -308,17 +308,24 @@
 			return;
 		} 
 		// Tabelle aufbauen
+		
+		
+		
 		$table = '<style type="text/css">';
 		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
 		$table .= "</style>";
 		$table .= '<table class="tg">';
-		
 		$table .= '<tr>';
 		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+		$table .= '</tr>';
+		$table .= '<tr>';
 		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
+		$table .= '</tr>';
+		$table .= '<tr>';
 		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 		$table .= '</tr>';
 		$table .= '</table>';
+		
 		//$table = $Text;
 		
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationDetail"))) {
