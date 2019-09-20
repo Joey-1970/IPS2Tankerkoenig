@@ -36,8 +36,8 @@
 		$this->RegisterVariableString("PetrolStationDetail", "Details", "~HTMLBox", 30);
 				
 		$this->RegisterVariableFloat("Diesel", "Diesel", "~Euro", 50);
-		$this->RegisterVariableFloat("E5", "E5", "~Euro", 60);
-		$this->RegisterVariableFloat("E10", "E10", "~Euro", 60);
+		$this->RegisterVariableFloat("E5", "Super E5", "~Euro", 60);
+		$this->RegisterVariableFloat("E10", "Super E10", "~Euro", 60);
         }
  	
 	public function GetConfigurationForm() 
@@ -133,22 +133,40 @@
 		$Diesel = 100;
 		$E5 = 100;
 		$E10 = 100;
-		// Mittelpreise ermitteln
+		// Variablen für Mittelpreise
 		$DieselArray = array();
 		$E5Array = array();
 		$E10Array = array();
 		foreach($ResultArray->stations as $Stations) {
-			If (($Diesel > floatval($Stations->diesel)) AND (floatval($Stations->diesel) > 0)) {
-				$Diesel = floatval($Stations->diesel);
-				$DieselArray[] = floatval($Stations->diesel);
+			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
+				If (($Diesel > floatval($Stations->diesel)) AND (floatval($Stations->diesel) > 0)) {
+					$Diesel = floatval($Stations->diesel);
+					$DieselArray[] = floatval($Stations->diesel);
+				}
+				If (($E5 > floatval($Stations->e5)) AND (floatval($Stations->e5) > 0)) {
+					$E5 = floatval($Stations->e5);
+					$E5Array[] = floatval($Stations->e5);
+				}
+				If (($E10 > floatval($Stations->e10)) AND (floatval($Stations->e10) > 0)) {
+					$E10 = floatval($Stations->e10);
+					$E10Array[] = floatval($Stations->e10);
+				}
 			}
-			If (($E5 > floatval($Stations->e5)) AND (floatval($Stations->e5) > 0)) {
-				$E5 = floatval($Stations->e5);
-				$E5Array[] = floatval($Stations->e5);
-			}
-			If (($E10 > floatval($Stations->e10)) AND (floatval($Stations->e10) > 0)) {
-				$E10 = floatval($Stations->e10);
-				$E10Array[] = floatval($Stations->e10);
+			else {
+				If ($Stations->isOpen == true) {
+					If (($Diesel > floatval($Stations->diesel)) AND (floatval($Stations->diesel) > 0)) {
+						$Diesel = floatval($Stations->diesel);
+						$DieselArray[] = floatval($Stations->diesel);
+					}
+					If (($E5 > floatval($Stations->e5)) AND (floatval($Stations->e5) > 0)) {
+						$E5 = floatval($Stations->e5);
+						$E5Array[] = floatval($Stations->e5);
+					}
+					If (($E10 > floatval($Stations->e10)) AND (floatval($Stations->e10) > 0)) {
+						$E10 = floatval($Stations->e10);
+						$E10Array[] = floatval($Stations->e10);
+					}
+				}
 			}
 		}
 		$this->SendDebug("ShowResult", "Diesel: ".$Diesel." E5: ".$E5." E10: ".$E10, 0);
