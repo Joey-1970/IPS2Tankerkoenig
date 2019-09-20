@@ -314,10 +314,12 @@
 		$table .= '<table class="tg">';
 		$table .= "<tr>";
 		$table .= '<th class="tg-kv4b">Detaildaten</th>';
-		
+		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
+		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 		
 		$table .= '</table>';
-		$table = $Text;
+		//$table = $Text;
 		
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationDetail"))) {
 			SetValueString($this->GetIDForIdent("PetrolStationDetail"), $table);
