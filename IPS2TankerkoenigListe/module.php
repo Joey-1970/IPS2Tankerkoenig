@@ -339,14 +339,29 @@
 			foreach($ResultArray->station->openingTimes as $Open) {
 				$table .= '<tr>';
 				$table .= '<td class="tg-611x">'.$Open->text.'</td>';
-				$table .= '<td class="tg-611x">'.$Open->start.'</td>';
-				$table .= '<td class="tg-611x">'.$Open->end.'</td>';
+				$table .= '<td class="tg-611x">'.$Open->start." Uhr bis ".'</td>';
+				$table .= '<td class="tg-611x">'.$Open->end." Uhr".'</td>';
 				$table .= '</tr>';
-			}			
+			}
+			If (boolval($ResultArray->station->isOpen) == true) {
+				$table .= '<tr>';
+				$table .= '<td class="tg-611x">'."Aktuell geöffnet".'</td>';
+				$table .= '</tr>';
+			}
+			else {
+				$table .= '<tr>';
+				$table .= '<td class="tg-611x">'."Aktuell geschlossen".'</td>';
+				$table .= '</tr>';
+			}
+			foreach($ResultArray->station->overrides as $Closed) {
+				$table .= '<tr>';
+				$table .= '<td class="tg-611x">'.$Closed.'</td>';
+				$table .= '</tr>';
+			}
 		}
 		$table .= '</table>';
-		
-		//$table = $Text;
+		$Lat = floatval($ResultArray->station->lat);
+		$Long = floatval($ResultArray->station->lng);
 		
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationDetail"))) {
 			SetValueString($this->GetIDForIdent("PetrolStationDetail"), $table);
