@@ -316,13 +316,13 @@
 		$table .= "</style>";
 		$table .= '<table class="tg">';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->brand)).'</td>';
+		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->brand)).'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->name)).'</td>';
+		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->name)).'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->place)).'</td>';
+		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->place)).'</td>';
 		$table .= '</tr>';
 		$table .= '</table>';
 		
