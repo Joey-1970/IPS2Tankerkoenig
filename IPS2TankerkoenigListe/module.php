@@ -312,12 +312,12 @@
 		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
 		$table .= "</style>";
 		$table .= '<table class="tg">';
-		$table .= "<tr>";
-		$table .= '<th class="tg-kv4b">Detaildaten</th>';
+		
+		$table .= '<tr>';
 		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
 		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 		$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
-		
+		$table .= '</tr>';
 		$table .= '</table>';
 		//$table = $Text;
 		
