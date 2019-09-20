@@ -327,6 +327,23 @@
 		$table .= '<tr>';
 		$table .= '<td class="tg-611x">'.$ResultArray->station->postCode." ".ucwords(strtolower($ResultArray->station->place)).'</td>';
 		$table .= '</tr>';
+		If (boolval($ResultArray->station->wholeDay) == true) {
+			$table .= '<tr>';
+			$table .= '<td class="tg-611x">'."Ganztägig geöffnet".'</td>';
+			$table .= '</tr>';
+		}
+		else {
+			$table .= '<tr>';
+			$table .= '<td class="tg-611x">'."Öffnungszeiten:".'</td>';
+			$table .= '</tr>';
+			foreach($ResultArray->station->openingTimes as $Open) {
+				$table .= '<tr>';
+				$table .= '<td class="tg-611x">'.$Open->text.'</td>';
+				$table .= '<td class="tg-611x">'.$Open->start.'</td>';
+				$table .= '<td class="tg-611x">'.$Open->end.'</td>';
+				$table .= '</tr>';
+			}			
+		}
 		$table .= '</table>';
 		
 		//$table = $Text;
