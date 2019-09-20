@@ -366,8 +366,10 @@
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStationDetail"))) {
 			SetValueString($this->GetIDForIdent("PetrolStationDetail"), $table);
 		}
+		$MapStyle = "roadmap";
+		$Map = "<iframe src=\"user/map.php?lat=".$Long."&Lng=".$Lat."&map=".$MapStyle."&devicename=".$ResultArray->station->brand."\" border=\"0\" frameborder=\"0\" style=\"top:0pt; bottom:0pt; left:0pt; right:0pt; width:100%; height:600px;\"/></iframe>";
 		
-		$Map = '<iframe style="border: 1px solid black" src="http://www.openstreetmap.org/exportembed.html?bbox=10.676613450050354%2C53.86523244317649%2C10.680765509605408%2C53.867120905651895&layer=mapnik" height="350" width="425" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"> </iframe> <small><a href="http://www.openstreetmap.org/#map=18/53.86618/10.67869">Größere Karte anzeigen</a></small>';
+		//$Map = '<iframe style="border: 1px solid black" src="http://www.openstreetmap.org/exportembed.html?bbox=10.676613450050354%2C53.86523244317649%2C10.680765509605408%2C53.867120905651895&layer=mapnik" height="350" width="425" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"> </iframe> <small><a href="http://www.openstreetmap.org/#map=18/53.86618/10.67869">Größere Karte anzeigen</a></small>';
 		If ($Map <> GetValueString($this->GetIDForIdent("Map"))) {
 			SetValueString($this->GetIDForIdent("Map"), $Map);
 		}
