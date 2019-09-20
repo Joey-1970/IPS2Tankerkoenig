@@ -46,6 +46,7 @@
 		$arrayStatus[] = array("code" => 101, "icon" => "inactive", "caption" => "Instanz wird erstellt"); 
 		$arrayStatus[] = array("code" => 102, "icon" => "active", "caption" => "Instanz ist aktiv");
 		$arrayStatus[] = array("code" => 104, "icon" => "inactive", "caption" => "Instanz ist inaktiv");
+		$arrayStatus[] = array("code" => 202, "icon" => "error", "caption" => "Kommunikationfehler!");
 				
 		$arrayElements = array(); 
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Lat", "caption" => "Latitude", "digits" => 4);
@@ -102,10 +103,12 @@
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 			If ($Result <> false) {
+				$this->SetStatus(102);
 				$this->SendDebug("GetDataUpdate", $Result, 0);
 				$this->ShowResult($Result);
 			}
 			else {
+				$this->SetStatus(202);
 				$this->SendDebug("GetDataUpdate", "Fehler bei der Datenermittlung!", 0);
 			}
 		}
@@ -283,10 +286,12 @@
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetDetailInformation", "InstanceID" => $this->InstanceID, "StationID" => $StationID)));
 			If ($Result <> false) {
+				$this->SetStatus(102);
 				$this->SendDebug("GetStationDetails", $Result, 0);
 				$this->ShowDetails($Result);
 			}
 			else {
+				$this->SetStatus(202);
 				$this->SendDebug("GetStationDetails", "Fehler bei der Datenermittlung!", 0);
 			}
 		}
