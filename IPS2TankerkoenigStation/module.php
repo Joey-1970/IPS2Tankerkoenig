@@ -1,6 +1,6 @@
 <?
     // Klassendefinition
-    class IPS2TankerkoenigListe extends IPSModule 
+    class IPS2TankerkoenigStation extends IPSModule 
     {
 	public function Destroy() 
 	{
@@ -15,29 +15,24 @@
             	// Diese Zeile nicht löschen.
             	parent::Create();
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
-		$this->RegisterPropertyFloat("Lat", 0.0);
-		$this->RegisterPropertyFloat("Long", 0.0);
-		$this->RegisterPropertyFloat("Radius", 5.0);
+		$this->RegisterPropertyString("StationID", "");
 		$this->RegisterPropertyInteger("Timer_1", 10);
-		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
+		$this->RegisterTimer("Timer_1", 0, 'I2TStation_GetDataUpdate($_IPS["TARGET"]);');
 		$this->RegisterPropertyBoolean("Diesel", true);
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
-		$this->RegisterPropertyBoolean("ShowOnlyOpen", true);
 		
 		// Webhook einrichten
-		$this->RegisterHook("/hook/IPS2TankerkoenigListe_".$this->InstanceID);
+		//$this->RegisterHook("/hook/IPS2TankerkoenigListe_".$this->InstanceID);
 		
 		// Status-Variablen anlegen
-		$this->RegisterVariableString("PetrolStationList", "Tankstellen", "~HTMLBox", 10);
+		$this->RegisterVariableString("PetrolStation", "Tankstellen", "~HTMLBox", 10);
 		
 		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 20);
-		
-		$this->RegisterVariableString("PetrolStationDetail", "Details", "~HTMLBox", 30);
-				
-		$this->RegisterVariableFloat("Diesel", "Diesel", "~Euro", 50);
-		$this->RegisterVariableFloat("E5", "Super E5", "~Euro", 60);
-		$this->RegisterVariableFloat("E10", "Super E10", "~Euro", 60);
+			
+		$this->RegisterVariableFloat("Diesel", "Diesel", "~Euro", 30);
+		$this->RegisterVariableFloat("E5", "Super E5", "~Euro", 40);
+		$this->RegisterVariableFloat("E10", "Super E10", "~Euro", 50);
         }
  	
 	public function GetConfigurationForm() 
