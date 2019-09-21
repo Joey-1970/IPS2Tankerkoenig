@@ -1,0 +1,14 @@
+{
+  "id": "{47286CAD-187A-6D88-89F0-BDA50CBF712F}",
+  "name": "IPS2TankerkoenigStation",
+  "type": 3,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2TankerkoenigStation"
+  ],
+  "parentRequirements": ["{6ADD0473-D761-A2BF-63BE-CFE279089F5A}"],
+  "childRequirements": [],
+  "implemented": ["{3C01DDC5-7302-55A3-9F40-56B49A882572}"],
+  "prefix": "I2TStation"
+}
