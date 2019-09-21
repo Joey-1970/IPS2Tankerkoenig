@@ -63,8 +63,6 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 		
-		SetValueString($this->GetIDForIdent("PetrolStationDetail"), "");
-		
 		If (IPS_GetKernelRunlevel() == 10103) {	
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
