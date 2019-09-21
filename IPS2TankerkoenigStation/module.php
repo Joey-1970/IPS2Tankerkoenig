@@ -22,14 +22,17 @@
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
 		
+		// Profil anlegen
+		$this->RegisterProfileFloat("IPS2Tankerkoenig.Euro", "Euro", "", " €", 0, 1000, 0.001, 3);
+		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStation", "Tankstelle", "~HTMLBox", 10);
 		
 		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 20);
 			
-		$this->RegisterVariableFloat("Diesel", "Diesel", "~Euro", 30);
-		$this->RegisterVariableFloat("E5", "Super E5", "~Euro", 40);
-		$this->RegisterVariableFloat("E10", "Super E10", "~Euro", 50);
+		$this->RegisterVariableFloat("Diesel", "Diesel", "IPS2Tankerkoenig.Euro", 30);
+		$this->RegisterVariableFloat("E5", "Super E5", "IPS2Tankerkoenig.Euro", 40);
+		$this->RegisterVariableFloat("E10", "Super E10", "IPS2Tankerkoenig.Euro", 50);
         }
  	
 	public function GetConfigurationForm() 
@@ -183,24 +186,23 @@
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	
- 	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+	private function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 	{
 	        if (!IPS_VariableProfileExists($Name))
 	        {
-	            IPS_CreateVariableProfile($Name, 1);
+	            IPS_CreateVariableProfile($Name, 2);
 	        }
 	        else
 	        {
 	            $profile = IPS_GetVariableProfile($Name);
-	            if ($profile['ProfileType'] != 1)
+	            if ($profile['ProfileType'] != 2)
 	                throw new Exception("Variable profile type does not match for profile " . $Name);
 	        }
 	        IPS_SetVariableProfileIcon($Name, $Icon);
 	        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
-	        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);    
-	}    
-	
-
+	        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+	        IPS_SetVariableProfileDigits($Name, $Digits);
+	}
 	    
 	protected function HasActiveParent()
     	{
