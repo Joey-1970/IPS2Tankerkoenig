@@ -42,7 +42,7 @@
 				
 		$arrayElements = array(); 
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "StationID", "caption" => "Tankstellen ID");
-		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung (gemäß Tankerkönig.de Minumum 10 Minuten)");
+		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung (gemäß Tankerkönig.de Minimum 10 Minuten)");
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "min");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Sorten");
@@ -90,7 +90,7 @@
 			If ($Result <> false) {
 				$this->SetStatus(102);
 				$this->SendDebug("GetDataUpdate", $Result, 0);
-				$this->ShowDetails($Result);
+				$this->ShowResult($Result);
 			}
 			else {
 				$this->SetStatus(202);
