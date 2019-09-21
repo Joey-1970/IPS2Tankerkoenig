@@ -83,6 +83,7 @@
 	// Beginn der Funktionen
 	public function GetDataUpdate()
 	{
+		$StationID = $this->ReadPropertyString("StationID");
 		If (strlen($StationID) > 0) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetDetailInformation", "InstanceID" => $this->InstanceID, "StationID" => $StationID)));
