@@ -22,9 +22,6 @@
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
 		
-		// Webhook einrichten
-		//$this->RegisterHook("/hook/IPS2TankerkoenigListe_".$this->InstanceID);
-		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStation", "Tankstelle", "~HTMLBox", 10);
 		
@@ -171,6 +168,18 @@
 		
 		If ($table <> GetValueString($this->GetIDForIdent("PetrolStation"))) {
 			SetValueString($this->GetIDForIdent("PetrolStation"), $table);
+		}
+		$Diesel = floatval($ResultArray->station->diesel);
+		$E5 = floatval($ResultArray->station->e5);
+		$E10 = floatval($ResultArray->station->e10);
+		If ($Diesel <> GetValueFloat($this->GetIDForIdent("Diesel"))) {
+			SetValueFloat($this->GetIDForIdent("Diesel"), $Diesel);
+		}
+		If ($E5 <> GetValueFloat($this->GetIDForIdent("E5"))) {
+			SetValueFloat($this->GetIDForIdent("E5"), $E5);
+		}
+		If ($E10 <> GetValueFloat($this->GetIDForIdent("E10"))) {
+			SetValueFloat($this->GetIDForIdent("E10"), $E10);
 		}
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
