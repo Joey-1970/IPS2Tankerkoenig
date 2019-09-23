@@ -27,6 +27,13 @@
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Long", "caption" => "Longitude", "digits" => 4);
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius", "digits" => 1);
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
+		$arrayColumns = array();
+		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "200px", "visible" => "true");
+		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "auto", "visible" => "true");
+		$arrayColumns[] = array("caption" => "Ort", "name" => "ServiceStatus", "width" => "auto", "visible" => "true");
+		$arrayColumns[] = array("caption" => "Ort", "name" => "ServiceStatus", "width" => "auto", "visible" => "false");
+
+		
 		
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
