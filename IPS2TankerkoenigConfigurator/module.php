@@ -12,6 +12,7 @@
 		$this->RegisterPropertyFloat("Lat", 0.0);
 		$this->RegisterPropertyFloat("Long", 0.0);
 		$this->RegisterPropertyFloat("Radius", 5.0);
+		$this->RegisterPropertyString("PetrolStations", "");
         }
  	
 	public function GetConfigurationForm() 
@@ -27,14 +28,19 @@
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Long", "caption" => "Longitude", "digits" => 4);
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius", "digits" => 1);
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
+		$arraySort = array();
+		$arraySort = array("column" => "Marke", "direction" => "ascending");
+		
 		$arrayColumns = array();
 		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "200px", "visible" => "true");
-		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "auto", "visible" => "true");
-		$arrayColumns[] = array("caption" => "Ort", "name" => "ServiceStatus", "width" => "auto", "visible" => "true");
-		$arrayColumns[] = array("caption" => "Ort", "name" => "ServiceStatus", "width" => "auto", "visible" => "false");
+		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "400px", "visible" => "true");
+		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "300px", "visible" => "true");
+		$arrayColumns[] = array("caption" => "ID", "name" => "ID", "width" => "auto", "visible" => "false");
 
+		$arrayValues[] = array();
 		
-		
+		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
+
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
 		$arrayActions = array();
