@@ -32,10 +32,10 @@
 		$arraySort = array("column" => "Brand", "direction" => "ascending");
 		
 		$arrayColumns = array();
-		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "100px", "visible" => "true");
-		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "250px", "visible" => "true");
-		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "200px", "visible" => "true");
-		$arrayColumns[] = array("caption" => "ID", "name" => "ID", "width" => "auto", "visible" => "false");
+		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "100px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "250px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "200px", "visible" => true);
+		$arrayColumns[] = array("caption" => "ID", "name" => "ID", "width" => "auto", "visible" => false);
 
 		$arrayValues[] = array();
 		
