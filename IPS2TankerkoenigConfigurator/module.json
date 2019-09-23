@@ -1,0 +1,14 @@
+{
+  "id": "{1F47ACB1-BD0F-F439-66CE-27D0997149F6}",
+  "name": "IPS2TankerkoenigConfigurator",
+  "type": 4,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2TankerkoenigConfigurator"
+  ],
+  "parentRequirements": ["{6ADD0473-D761-A2BF-63BE-CFE279089F5A}"],
+  "childRequirements": [],
+  "implemented": ["{3C01DDC5-7302-55A3-9F40-56B49A882572}"],
+  "prefix": "I2TConfigurator"
+}
