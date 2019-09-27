@@ -83,7 +83,7 @@
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
-				If (($this->ReadPropertyFloat("Lat") <> 0) AND ($this->ReadPropertyFloat("Long") <> 0) AND ($this->ReadPropertyFloat("Radius") > 0)) {
+				If ($this->ReadPropertyFloat("Radius") > 0) {
 					$this->GetDataUpdate();
 				}
 				else {
