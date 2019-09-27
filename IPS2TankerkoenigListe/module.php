@@ -16,8 +16,6 @@
             	parent::Create();
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');  
-		$this->RegisterPropertyFloat("Lat", 0.0);
-		$this->RegisterPropertyFloat("Long", 0.0);
 		$this->RegisterPropertyFloat("Radius", 5.0);
 		$this->RegisterPropertyInteger("Timer_1", 10);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
@@ -54,9 +52,7 @@
 				
 		$arrayElements = array();
 		$arrayElements[] = array("type" => "SelectLocation", "name" => "Location", "caption" => "Region");
-		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Lat", "caption" => "Latitude", "digits" => 4);
-		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Long", "caption" => "Longitude", "digits" => 4);
-		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius", "digits" => 1);
+		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius (km)", "digits" => 1);
 		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung (gemäß Tankerkönig.de Minimum 10 Minuten)");
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "min");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
@@ -103,11 +99,9 @@
 	// Beginn der Funktionen
 	public function GetDataUpdate()
 	{
-		$Lat = $this->ReadPropertyFloat("Lat");
-		$Long = $this->ReadPropertyFloat("Long");
-		
-		$Lat = $this->ReadPropertyString("Location->latitude");
-		$Long = $this->ReadPropertyString("Location->longitude");
+		$locationObject = json_decode($this->ReadPropertyString('Location'), true);
+		$Lat = $locationObject['latitude'];
+		$Long = $locationObject['longitude'];  
 		$Radius = $this->ReadPropertyFloat("Radius");
 		If (($Lat <> 0) AND ($Long <> 0) AND ($Radius > 0)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
