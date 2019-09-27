@@ -92,7 +92,50 @@
 	}
 	    
 	// Beginn der Funktionen
-	
+	private function sendComplaint($StationID, $complaintType, $Correction)
+	{
+    		$ApiKey = $this->ReadPropertyString("ApiKey");
+    		$Success = false;
+    		$complaintTypeArray = array("wrongPetrolStationName", "wrongStatusOpen", "wrongStatusClosed", "wrongPriceE5", "wrongPriceE10", 
+    			"wrongPriceDiesel", "wrongPetrolStationBrand", "wrongPetrolStationStreet", "wrongPetrolStationHouseNumber", 
+    			"wrongPetrolStationPostcode", "wrongPetrolStationPlace", "wrongPetrolStationLocation");
+   
+    		if (in_array($complaintType, $complaintTypeArray)) {
+        		$data = array("apikey" => $ApiKey, "id" => $StationID, "type" => $complaintType);
+
+        		if ($Correction) {
+            			$data["correction"] = $Correction;
+        		}
+
+        		$URL = "https://creativecommons.tankerkoenig.de/json/complaint.php";
+        
+        		$Options = array(
+            			'http' => array(
+            			'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            			'method'  => 'POST',
+            			'content' => http_build_query($data)));
+
+        		$Context  = stream_context_create($Options);
+        		$Result = file_get_contents($URL, false, $Context);
+        		$ResultArray = array();
+        		$ResultArray = json_decode($Result);
+        		// Ergebnis auswerten
+			If ($ResultArray->ok == true) {
+            			$this->SendDebug("sendComplaint", "Korrektur erfolgreich durchgeführt", 0);
+            			$Success = true;
+        		}
+        		else {
+            			$this->SendDebug("sendComplaint", "Korrektur nicht erfolgreich! Fehler: ".$ResultArray->message, 0);
+            			$Success = false;
+        		}
+    		}
+    		else {
+        		$this->SendDebug("sendComplaint", "Unbekannter Befehl: ".$complaintType, 0);
+	       		$Success = false;
+    		}
+
+	return $Success;  
+	}
 	
 	
 }
