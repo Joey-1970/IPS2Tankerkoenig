@@ -11,7 +11,7 @@
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');  
 		$this->RegisterPropertyFloat("Radius", 5.0);
-		$this->RegisterPropertyString("PetrolStations", "");
+		//$this->RegisterPropertyString("PetrolStations", "");
         }
  	
 	public function GetConfigurationForm() 
