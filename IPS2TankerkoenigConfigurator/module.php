@@ -75,6 +75,7 @@
 		$Lat = $locationObject['latitude'];
 		$Long = $locationObject['longitude']; 
 		$Radius = $this->ReadPropertyFloat("Radius");
+		$StationArray = array();
 		If (($Lat <> 0) AND ($Long <> 0) AND ($Radius > 0)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
@@ -89,7 +90,7 @@
 					$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
 					return;
 				}
-				$StationArray = array();
+				
 				$i = 0;
 				foreach($ResultArray->stations as $Stations) {
 					$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
@@ -100,7 +101,7 @@
 					$i = $i + 1;
 				}
 				$this->SendDebug("GetData", "TankstellenArray: ".serialize($StationArray), 0);
-				return serialize($StationArray);
+				
 			}
 			else {
 				$this->SetStatus(202);
@@ -110,6 +111,7 @@
 		else {
 			$this->SendDebug("GetDataUpdate", "Keine Koordinaten verfügbar!", 0);
 		}
+	return serialize($StationArray);
 	}
 	
 	private function ShowResult(string $Text)
