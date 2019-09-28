@@ -131,6 +131,7 @@
         		If (strtolower(IPS_GetProperty($Module, "StationID")) == strtolower($StationID)) {
             			$this->SendDebug("GetStationInstanceID", "Gefundene Instanz: ".$Module, 0);
 				$Result = $Module;
+				break;
         		}
         		else {
             			$Result = 0;
