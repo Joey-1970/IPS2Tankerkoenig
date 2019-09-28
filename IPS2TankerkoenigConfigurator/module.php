@@ -35,7 +35,12 @@
 		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "200px", "visible" => true);
 		$arrayColumns[] = array("caption" => "ID", "name" => "ID", "width" => "auto", "visible" => false);
 
-		$arrayValues[] = array();
+		$StationArray = array();
+		$StationArray = $this->GetData();
+		$arrayValues = array();
+		for ($i = 0; $i < Count($DeviceArray); $i++) {
+			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Ort" => $StationArray[$i]["Place"], "ID" => $StationArray[$i]["ID"]);
+		}
 		
 		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
 
@@ -64,7 +69,7 @@
 	}
 	    
 	// Beginn der Funktionen
-	public function GetDataUpdate()
+	privte function GetData()
 	{
 		$locationObject = json_decode($this->ReadPropertyString('Location'), true);
 		$Lat = $locationObject['latitude'];
@@ -75,12 +80,12 @@
 				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 			If ($Result <> false) {
 				$this->SetStatus(102);
-				$this->SendDebug("GetDataUpdate", $Result, 0);
+				$this->SendDebug("GetData", $Result, 0);
 				$this->ShowResult($Result);
 			}
 			else {
 				$this->SetStatus(202);
-				$this->SendDebug("GetDataUpdate", "Fehler bei der Datenermittlung!", 0);
+				$this->SendDebug("GetData", "Fehler bei der Datenermittlung!", 0);
 			}
 		}
 		else {
@@ -92,15 +97,23 @@
 	{
 		$ResultArray = array();
 		$ResultArray = json_decode($Text);
-		$ColorCode = "#00FF00";
 		// Fehlerbehandlung
 		If (boolval($ResultArray->ok) == false) {
 			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
 			return;
 		}
-		
-		
-		
+		$StationArray = array();
+		$i = 0;
+		foreach($ResultArray->stations as $Stations) {
+			$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
+			$StationArray[$i]["Name"] = ucwords(strtolower($Stations->name));
+			$StationArray[$i]["Place"] = ucwords(strtolower($Stations->place));
+			$StationArray[$i]["ID"] = ucwords(strtolower($Stations->id));
+			
+			$i = $i + 1;
+		}
+		$this->SendDebug("ShowResult", "TankstellenArray: ".serialize($StationArray), 0);
+	return $StationArray;
 	}
 	
 
