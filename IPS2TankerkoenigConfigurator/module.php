@@ -32,13 +32,15 @@
 		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "100px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "250px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "200px", "visible" => true);
-		$arrayColumns[] = array("caption" => "ID", "name" => "ID", "width" => "auto", "visible" => false);
+		$arrayColumns[] = array("caption" => "Instanz ID", "name" => "Instance", "width" => "200px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Stations ID", "name" => "StationsID", "width" => "auto", "visible" => false);
 
 		$StationArray = array();
 		$StationArray = unserialize($this->GetData());
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
-			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Place" => $StationArray[$i]["Place"], "ID" => $StationArray[$i]["ID"]);
+			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], 
+					       "Place" => $StationArray[$i]["Place"], "Instance" => $StationArray[$i]["InstanceID"], "StationsID" => $StationArray[$i]["StationsID"]);
 		}
 		
 		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
@@ -95,7 +97,8 @@
 					$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
 					$StationArray[$i]["Name"] = ucwords(strtolower($Stations->name));
 					$StationArray[$i]["Place"] = ucwords(strtolower($Stations->place));
-					$StationArray[$i]["ID"] = ucwords(strtolower($Stations->id));
+					$StationArray[$i]["StationsID"] = $Stations->id;
+					$StationArray[$i]["InstanceID"] = $this->GetStationInstanceID($Stations->id);
 
 					$i = $i + 1;
 				}
@@ -113,27 +116,22 @@
 	return serialize($StationArray);
 	}
 	
-	private function ShowResult(string $Text)
+	function GetStationInstanceID($StationID)
 	{
-		$ResultArray = array();
-		$ResultArray = json_decode($Text);
-		// Fehlerbehandlung
-		If (boolval($ResultArray->ok) == false) {
-			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
-			return;
-		}
-		$StationArray = array();
-		$i = 0;
-		foreach($ResultArray->stations as $Stations) {
-			$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
-			$StationArray[$i]["Name"] = ucwords(strtolower($Stations->name));
-			$StationArray[$i]["Place"] = ucwords(strtolower($Stations->place));
-			$StationArray[$i]["ID"] = ucwords(strtolower($Stations->id));
-			
-			$i = $i + 1;
-		}
-		$this->SendDebug("ShowResult", "TankstellenArray: ".serialize($StationArray), 0);
-	return $StationArray;
+		$guid = "{47286CAD-187A-6D88-89F0-BDA50CBF712F}";
+	    	$Result = 0;
+	    	// Modulinstanzen suchen
+	    	$InstanceArray = array();
+	    	$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
+	    	foreach($InstanceArray as $Module) {
+        		If (IPS_GetProperty($Module, "StationID") == $StationID) {
+            			$Result = $Module;
+        		}
+        		else {
+            			$Result = 0;
+        		}
+    		}
+	return $Result;
 	}
 	
 
