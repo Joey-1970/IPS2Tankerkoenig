@@ -40,7 +40,7 @@
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], 
-					       "Place" => $StationArray[$i]["Place"], "InstanceID" => $StationArray[$i]["InstanceID"], "StationsID" => $StationArray[$i]["StationsID"]);
+					       "Place" => $StationArray[$i]["Place"], "instanceID" => $StationArray[$i]["InstanceID"], "StationsID" => $StationArray[$i]["StationsID"]);
 		}
 		
 		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
