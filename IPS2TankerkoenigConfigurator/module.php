@@ -69,7 +69,7 @@
 	}
 	    
 	// Beginn der Funktionen
-	privte function GetData()
+	private function GetData()
 	{
 		$locationObject = json_decode($this->ReadPropertyString('Location'), true);
 		$Lat = $locationObject['latitude'];
