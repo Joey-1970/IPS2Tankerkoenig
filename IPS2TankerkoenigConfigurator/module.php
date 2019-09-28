@@ -11,7 +11,6 @@
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');  
 		$this->RegisterPropertyFloat("Radius", 5.0);
-		//$this->RegisterPropertyString("PetrolStations", "");
         }
  	
 	public function GetConfigurationForm() 
@@ -39,7 +38,7 @@
 		$StationArray = unserialize($this->GetData());
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
-			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Ort" => $StationArray[$i]["Place"], "ID" => $StationArray[$i]["ID"]);
+			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Place" => $StationArray[$i]["Place"], "ID" => $StationArray[$i]["ID"]);
 		}
 		
 		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
