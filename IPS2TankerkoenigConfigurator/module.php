@@ -32,7 +32,7 @@
 		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "100px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "250px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "200px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Instanz ID", "name" => "Instance", "width" => "200px", "visible" => true);
+		//$arrayColumns[] = array("caption" => "Instanz ID", "name" => "Instance", "width" => "200px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Stations ID", "name" => "StationsID", "width" => "auto", "visible" => false);
 
 		$StationArray = array();
@@ -40,7 +40,7 @@
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], 
-					       "Place" => $StationArray[$i]["Place"], "Instance" => $StationArray[$i]["InstanceID"], "StationsID" => $StationArray[$i]["StationsID"]);
+					       "Place" => $StationArray[$i]["Place"], "InstanceID" => $StationArray[$i]["InstanceID"], "StationsID" => $StationArray[$i]["StationsID"]);
 		}
 		
 		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
