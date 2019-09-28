@@ -31,10 +31,9 @@
 		$arrayColumns = array();
 		$arrayColumns[] = array("caption" => "Marke", "name" => "Brand", "width" => "100px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "250px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "200px", "visible" => true);
-		//$arrayColumns[] = array("caption" => "Instanz ID", "name" => "Instance", "width" => "200px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Stations ID", "name" => "StationsID", "width" => "auto", "visible" => false);
-
+		$arrayColumns[] = array("caption" => "Strasse", "name" => "Street", "width" => "200px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "auto", "visible" => true);
+		
 		$StationArray = array();
 		$StationArray = unserialize($this->GetData());
 		$arrayValues = array();
@@ -42,7 +41,7 @@
 			$arrayCreate = array();
 			$arrayCreate[] = array("moduleID" => "{47286CAD-187A-6D88-89F0-BDA50CBF712F}", 
 					       "configuration" => array("StationID" => $StationArray[$i]["StationsID"], "Timer_1" => 10));
-			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], 
+			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Street" => $StationArray[$i]["Street"],
 					       "Place" => $StationArray[$i]["Place"], "instanceID" => $StationArray[$i]["InstanceID"], 
 					       "StationsID" => $StationArray[$i]["StationsID"], "create" => $arrayCreate);
 		}
@@ -100,6 +99,7 @@
 				foreach($ResultArray->stations as $Stations) {
 					$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
 					$StationArray[$i]["Name"] = ucwords(strtolower($Stations->name));
+					$StationArray[$i]["Street"] = ucwords(strtolower($Stations->street));
 					$StationArray[$i]["Place"] = ucwords(strtolower($Stations->place));
 					$StationArray[$i]["StationsID"] = $Stations->id;
 					$StationArray[$i]["InstanceID"] = $this->GetStationInstanceID($Stations->id);
