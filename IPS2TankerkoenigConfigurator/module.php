@@ -36,7 +36,7 @@
 		$arrayColumns[] = array("caption" => "ID", "name" => "ID", "width" => "auto", "visible" => false);
 
 		$StationArray = array();
-		$StationArray = $this->GetData();
+		$StationArray = unserialize($this->GetData());
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Ort" => $StationArray[$i]["Place"], "ID" => $StationArray[$i]["ID"]);
@@ -100,7 +100,7 @@
 					$i = $i + 1;
 				}
 				$this->SendDebug("GetData", "TankstellenArray: ".serialize($StationArray), 0);
-				return $StationArray;
+				return serialize($StationArray);
 			}
 			else {
 				$this->SetStatus(202);
