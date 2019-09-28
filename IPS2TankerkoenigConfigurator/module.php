@@ -81,7 +81,26 @@
 			If ($Result <> false) {
 				$this->SetStatus(102);
 				$this->SendDebug("GetData", $Result, 0);
-				$this->ShowResult($Result);
+				//$this->ShowResult($Result);
+				$ResultArray = array();
+				$ResultArray = json_decode($Result);
+				// Fehlerbehandlung
+				If (boolval($ResultArray->ok) == false) {
+					$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
+					return;
+				}
+				$StationArray = array();
+				$i = 0;
+				foreach($ResultArray->stations as $Stations) {
+					$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
+					$StationArray[$i]["Name"] = ucwords(strtolower($Stations->name));
+					$StationArray[$i]["Place"] = ucwords(strtolower($Stations->place));
+					$StationArray[$i]["ID"] = ucwords(strtolower($Stations->id));
+
+					$i = $i + 1;
+				}
+				$this->SendDebug("GetData", "TankstellenArray: ".serialize($StationArray), 0);
+				return $StationArray;
 			}
 			else {
 				$this->SetStatus(202);
