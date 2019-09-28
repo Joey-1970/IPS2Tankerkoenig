@@ -43,7 +43,7 @@
 					       "configuration" => array("StationID" => $StationArray[$i]["StationsID"], "Timer_1" => 10));
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Street" => $StationArray[$i]["Street"],
 					       "Place" => $StationArray[$i]["Place"], "instanceID" => $StationArray[$i]["InstanceID"], 
-					       "StationsID" => $StationArray[$i]["StationsID"], "create" => $arrayCreate);
+					       "create" => $arrayCreate);
 		}
 		
 		$arrayElements[] = array("type" => "Configurator", "name" => "PetrolStations", "caption" => "Tankstellen", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
