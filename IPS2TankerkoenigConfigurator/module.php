@@ -38,7 +38,7 @@
 		$StationArray = array();
 		$StationArray = $this->GetData();
 		$arrayValues = array();
-		for ($i = 0; $i < Count($DeviceArray); $i++) {
+		for ($i = 0; $i < Count($StationArray); $i++) {
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Ort" => $StationArray[$i]["Place"], "ID" => $StationArray[$i]["ID"]);
 		}
 		
