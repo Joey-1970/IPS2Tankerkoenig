@@ -128,7 +128,7 @@
 	    	$InstanceArray = array();
 	    	$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
 	    	foreach($InstanceArray as $Module) {
-        		If (IPS_GetProperty($Module, "StationID") == $StationID) {
+        		If (strtolower(IPS_GetProperty($Module, "StationID")) == strtolower($StationID)) {
             			$Result = $Module;
         		}
         		else {
