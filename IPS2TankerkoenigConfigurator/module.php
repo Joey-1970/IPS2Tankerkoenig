@@ -35,7 +35,9 @@
 		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "auto", "visible" => true);
 		
 		$StationArray = array();
-		$StationArray = unserialize($this->GetData());
+		If ($this->HasActiveParent() == true) {
+			$StationArray = unserialize($this->GetData());
+		}
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
 			$arrayCreate = array();
@@ -139,7 +141,6 @@
     		}
 	return $Result;
 	}
-	
 
 	protected function HasActiveParent()
     	{
