@@ -428,18 +428,6 @@
 			IPS_SetProperty($ids[0], "Hooks", json_encode($hooks)); 
 			IPS_ApplyChanges($ids[0]); 
 		} 
-	}     
-	    
-	protected function HasActiveParent()
-    	{
-		$Instance = @IPS_GetInstance($this->InstanceID);
-		if ($Instance['ConnectionID'] > 0)
-		{
-			$Parent = IPS_GetInstance($Instance['ConnectionID']);
-			if ($Parent['InstanceStatus'] == 102)
-			return true;
-		}
-        return false;
-    	}  
+	}      
 }
 ?>
