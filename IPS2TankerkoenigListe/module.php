@@ -133,6 +133,9 @@
 			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
 			return;
 		}
+		// Anzahl angezeigter Stationen begrenzen
+		$MaxStations = $this->ReadPropertyInteger("MaxStations");
+		$ResultArray = array_slice($ResultArray, 0, $MaxStations, true);  
 		// Preise untersuchen
 		$Diesel = 100;
 		$E5 = 100;
