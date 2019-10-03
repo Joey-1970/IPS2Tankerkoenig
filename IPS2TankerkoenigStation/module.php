@@ -60,10 +60,14 @@
 			$arrayActions[] = array("type" => "Label", "label" => "Daten der Tankstelle bei Tankerkoenig.de korrigieren");
 			$arrayActions[] = array("type" => "ValidationTextBox", "name" => "Brand", "caption" => "Marke", "value" => $this->GetBuffer("Brand"));
 			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Name", "value" => $this->GetBuffer("Name"));
-			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "value" => $this->GetBuffer("Street"));
-			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "HouseNumber", "value" => $this->GetBuffer("HouseNumber"));
-			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
-			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Place", "value" => $this->GetBuffer("Place"));
+			$arrayItems = array();
+			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "value" => $this->GetBuffer("Street"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "HouseNumber", "value" => $this->GetBuffer("HouseNumber"));
+			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
+			$arrayItems = array();
+			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "Place", "value" => $this->GetBuffer("Place"));
+			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
 			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand);');
 		}
 		else {
