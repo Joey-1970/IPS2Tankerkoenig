@@ -133,12 +133,12 @@
 			return;
 		} 
 		// Daten für die Korrekturen
-		$this->SetBuffer("Brand", $ResultArray->station->brand);
-		$this->SetBuffer("Name", $ResultArray->station->name);
-		$this->SetBuffer("Street", $ResultArray->station->street);
-		$this->SetBuffer("HouseNumber", $ResultArray->station->houseNumber);
-		$this->SetBuffer("PostCode", $ResultArray->station->postCode);
-		$this->SetBuffer("Place", $ResultArray->station->place);
+		$this->SetBuffer("Brand", "".$ResultArray->station->brand);
+		$this->SetBuffer("Name", "".$ResultArray->station->name);
+		$this->SetBuffer("Street", "".$ResultArray->station->street);
+		$this->SetBuffer("HouseNumber", "".$ResultArray->station->houseNumber);
+		$this->SetBuffer("PostCode", "".$ResultArray->station->postCode);
+		$this->SetBuffer("Place", "".$ResultArray->station->place);
 
 		
 		// Tabelle aufbauen
