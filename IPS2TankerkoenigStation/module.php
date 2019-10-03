@@ -58,8 +58,8 @@
 		If ((strlen($this->ReadPropertyString("StationID")) > 0) AND ($this->HasActiveParent() == true)) {
 			$this->GetDataUpdate();
 			$arrayActions[] = array("type" => "Label", "label" => "Daten der Tankstelle bei Tankerkoenig.de korrigieren");
-			$arrayElements[] = array("type" => "ValidationTextBox", "caption" => "Name", "Value" => $this->GetBuffer("Name"));
-			$arrayElements[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "Value" => $this->GetBuffer("Street"));
+			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Name", "Value" => $this->GetBuffer("Name"));
+			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "Value" => $this->GetBuffer("Street"));
 		}
 		else {
 			$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
