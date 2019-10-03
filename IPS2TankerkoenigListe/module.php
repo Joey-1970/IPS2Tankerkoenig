@@ -135,7 +135,6 @@
 		}
 		// Anzahl angezeigter Stationen begrenzen
 		$MaxStations = $this->ReadPropertyInteger("MaxStations");
-		$ResultArray = array_slice($ResultArray, 0, $MaxStations, true);  
 		// Preise untersuchen
 		$Diesel = 100;
 		$E5 = 100;
@@ -144,6 +143,7 @@
 		$DieselArray = array();
 		$E5Array = array();
 		$E10Array = array();
+		$i = 0;
 		foreach($ResultArray->stations as $Stations) {
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
 				If (($Diesel > floatval($Stations->diesel)) AND (floatval($Stations->diesel) > 0)) {
@@ -175,6 +175,7 @@
 					}
 				}
 			}
+			if(++$i > $MaxStations) break;
 		}
 		$this->SendDebug("ShowResult", "Diesel: ".$Diesel." E5: ".$E5." E10: ".$E10, 0);
 		// Mittelpreis ermitteln
@@ -214,6 +215,7 @@
 		$table .= '<th class="tg-kv4b">Details<br></th>';
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
+		$i = 0;
 		foreach($ResultArray->stations as $Stations) {
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
 				$table .= '<tr>';
@@ -288,7 +290,7 @@
 					$table .= '</tr>';
 				}
 			}
-				
+			if(++$i > $MaxStations) break;
 		}
 		
 		$table .= '</table>';
