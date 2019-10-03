@@ -68,7 +68,7 @@
 			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "PostCode", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
 			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "Place", "caption" => "Place", "value" => $this->GetBuffer("Place"));
 			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
-			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand, $Name, $Street, $Housenumber, $PostCode, $Place);');
+			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand, $Name, $Street, $HouseNumber, $PostCode, $Place);');
 		}
 		else {
 			$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
