@@ -59,16 +59,16 @@
 			$this->GetDataUpdate();
 			$arrayActions[] = array("type" => "Label", "label" => "Daten der Tankstelle bei Tankerkoenig.de korrigieren");
 			$arrayActions[] = array("type" => "ValidationTextBox", "name" => "Brand", "caption" => "Marke", "value" => $this->GetBuffer("Brand"));
-			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Name", "value" => $this->GetBuffer("Name"));
+			$arrayActions[] = array("type" => "ValidationTextBox", "name" => "Name", "caption" => "Name", "value" => $this->GetBuffer("Name"));
 			$arrayItems = array();
-			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "value" => $this->GetBuffer("Street"));
-			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "HouseNumber", "value" => $this->GetBuffer("HouseNumber"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "Street", "caption" => "Strasse", "value" => $this->GetBuffer("Street"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "HouseNumber", "caption" => "HouseNumber", "value" => $this->GetBuffer("HouseNumber"));
 			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
 			$arrayItems = array();
-			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
-			$arrayItems[] = array("type" => "ValidationTextBox", "caption" => "Place", "value" => $this->GetBuffer("Place"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "PostCode", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "Place", "caption" => "Place", "value" => $this->GetBuffer("Place"));
 			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
-			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand);');
+			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand, $Name, $Street, $Housenumber, $PostCode, $Place);');
 		}
 		else {
 			$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
@@ -212,7 +212,7 @@
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	
-	public function SetDataUpdate(string $Brand)
+	public function SetDataUpdate(string $Brand, string $Name, string $Street, string $Housenumber, string $PostCode, string $Place)
 	{
 		$this->SendDebug("SetDataUpdate", $Brand, 0);
 	}
