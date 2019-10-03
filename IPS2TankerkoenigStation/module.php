@@ -62,7 +62,7 @@
 			$arrayActions[] = array("type" => "ValidationTextBox", "name" => "Name", "caption" => "Name", "value" => $this->GetBuffer("Name"));
 			$arrayItems = array();
 			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "Street", "caption" => "Strasse", "value" => $this->GetBuffer("Street"));
-			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "HouseNumber", "caption" => "HouseNumber", "value" => $this->GetBuffer("HouseNumber"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "HouseNumber", "caption" => "Hausnummer", "value" => $this->GetBuffer("HouseNumber"));
 			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
 			$arrayItems = array();
 			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "PostCode", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
