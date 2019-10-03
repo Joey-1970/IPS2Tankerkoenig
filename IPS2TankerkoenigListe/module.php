@@ -22,6 +22,7 @@
 		$this->RegisterPropertyBoolean("Diesel", true);
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
+		$this->RegisterPropertyInteger("MaxStations", 25);
 		$this->RegisterPropertyBoolean("ShowOnlyOpen", true);
 		
 		// Webhook einrichten
@@ -62,6 +63,7 @@
 		$arrayElements[] = array("type" => "CheckBox", "name" => "E10", "caption" => "Super E10");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "ShowOnlyOpen", "caption" => "Nur geöffnete Tankstellen anzeigen"); 
+		$arrayElements[] = array("type" => "IntervalBox", "name" => "MaxStations", "caption" => "Anzahl max. anzuzeigender Tankstellen");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
 
