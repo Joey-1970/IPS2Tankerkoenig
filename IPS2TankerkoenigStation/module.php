@@ -55,7 +55,15 @@
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
 		$arrayActions = array();
-		$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
+		If ((strlen($this->ReadPropertyString("StationID")) > 0) AND ($this->HasActiveParent() == true)) {
+			$this->GetDataUpdate();
+			$arrayActions[] = array("type" => "Label", "label" => "Daten der Tankstelle bei Tankerkoenig.de korrigieren");
+			$arrayElements[] = array("type" => "ValidationTextBox", "caption" => "Name", "Value" => $this->GetBuffer("Name"));
+			$arrayElements[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "Value" => $this->GetBuffer("Street"));
+		}
+		else {
+			$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
+		}
 		
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements, "actions" => $arrayActions)); 		 
  	}       
@@ -115,6 +123,11 @@
 			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
 			return;
 		} 
+		// Daten für die Korrekturen
+		$this->SetBuffer("Name", $ResultArray->station->name);
+		$this->SetBuffer("Street", $ResultArray->station->street);
+
+		
 		// Tabelle aufbauen
 		$table = '<style type="text/css">';
 		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
