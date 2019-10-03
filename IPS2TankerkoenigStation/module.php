@@ -66,7 +66,7 @@
 			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
 			$arrayItems = array();
 			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "PostCode", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
-			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "Place", "caption" => "Place", "value" => $this->GetBuffer("Place"));
+			$arrayItems[] = array("type" => "ValidationTextBox", "name" => "Place", "caption" => "Ort", "value" => $this->GetBuffer("Place"));
 			$arrayActions[] = array("type" => "RowLayout", "items" => $arrayItems);
 			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand, $Name, $Street, $HouseNumber, $PostCode, $Place);');
 		}
