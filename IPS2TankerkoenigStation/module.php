@@ -58,8 +58,13 @@
 		If ((strlen($this->ReadPropertyString("StationID")) > 0) AND ($this->HasActiveParent() == true)) {
 			$this->GetDataUpdate();
 			$arrayActions[] = array("type" => "Label", "label" => "Daten der Tankstelle bei Tankerkoenig.de korrigieren");
+			$arrayActions[] = array("type" => "ValidationTextBox", "name" => "Brand", "caption" => "Marke", "value" => $this->GetBuffer("Brand"));
 			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Name", "value" => $this->GetBuffer("Name"));
 			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Strasse", "value" => $this->GetBuffer("Street"));
+			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "HouseNumber", "value" => $this->GetBuffer("HouseNumber"));
+			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "PLZ", "value" => $this->GetBuffer("PostCode"));
+			$arrayActions[] = array("type" => "ValidationTextBox", "caption" => "Place", "value" => $this->GetBuffer("Place"));
+			$arrayActions[] = array("type" => "Button", "label" => "Korrektur auslösen", "onClick" => 'I2TStation_SetDataUpdate($id, $Brand);');
 		}
 		else {
 			$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
@@ -124,8 +129,12 @@
 			return;
 		} 
 		// Daten für die Korrekturen
+		$this->SetBuffer("Brand", $ResultArray->station->brand);
 		$this->SetBuffer("Name", $ResultArray->station->name);
 		$this->SetBuffer("Street", $ResultArray->station->street);
+		$this->SetBuffer("HouseNumber", $ResultArray->station->houseNumber);
+		$this->SetBuffer("PostCode", $ResultArray->station->postCode);
+		$this->SetBuffer("Place", $ResultArray->station->place);
 
 		
 		// Tabelle aufbauen
@@ -199,6 +208,12 @@
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	
+	public function SetDataUpdate(string $Brand)
+	{
+		$this->SendDebug("SetDataUpdate", $Brand, 0);
+	}
+	
+	    
 	private function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 	{
 	        if (!IPS_VariableProfileExists($Name))
