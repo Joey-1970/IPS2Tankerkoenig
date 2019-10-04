@@ -401,11 +401,14 @@
 	
 	private function isValidUuid(string $UUID) 
 	{
-    		if (!is_string($UUID) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', strtoupper($UUID)) !== 1)) {
-        		$this->SendDebug("isValidUuid", "UUID ist ungültig!", 0);
-		return false;
+    		if (preg_match('/^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$/', strtoupper($UUID))) {
+        		//$this->SendDebug("isValidUuid", "UUID ist gültig", 0);
+			return true;
     		}
-    	return true;
+		else {
+			$this->SendDebug("isValidUuid", "UUID ist ungültig!", 0);
+			return false;
+    		}
 	}
 	    
 	private function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
