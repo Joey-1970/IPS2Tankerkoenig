@@ -215,6 +215,26 @@
 	public function SetDataUpdate(string $Brand, string $Name, string $Street, string $Housenumber, string $PostCode, string $Place)
 	{
 		$this->SendDebug("SetDataUpdate", $Brand, 0);
+		If ($Brand <>  $this->GetBuffer("Brand")) {
+			
+		}
+		If ($Name <> $this->GetBuffer("Name")) {
+			
+		}
+		If ($Street <> $this->GetBuffer("Street")) {
+			
+		}
+		If ($HouseNumber <> $this->GetBuffer("HouseNumber")) {
+			
+		}
+		If ($PostCode <> $this->GetBuffer("PostCode")) {
+			
+		}
+		If ($Place <> $this->GetBuffer("Place")) {
+			
+		}
+		
+		
 	}
 	
 	    
