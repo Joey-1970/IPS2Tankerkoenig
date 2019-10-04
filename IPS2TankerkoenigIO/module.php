@@ -107,8 +107,12 @@
 	// Beginn der Funktionen
 	private function sendComplaint($StationID, $complaintType, $Correction)
 	{
-    		$ApiKey = $this->ReadPropertyString("ApiKey");
-    		$Success = false;
+    		$this->SendDebug("sendComplaint", $StationID.", ".$complaintType.", ".$Correction, 0);
+		return true;
+		
+		
+		$ApiKey = $this->ReadPropertyString("ApiKey");
+		$Success = false;
     		$complaintTypeArray = array("wrongPetrolStationName", "wrongStatusOpen", "wrongStatusClosed", "wrongPriceE5", "wrongPriceE10", 
     			"wrongPriceDiesel", "wrongPetrolStationBrand", "wrongPetrolStationStreet", "wrongPetrolStationHouseNumber", 
     			"wrongPetrolStationPostcode", "wrongPetrolStationPlace", "wrongPetrolStationLocation");
