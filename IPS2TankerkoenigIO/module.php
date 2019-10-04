@@ -87,6 +87,19 @@
 					$this->SetStatus(102);
 				}
 				break;
+			case "DataCorrection":
+				$this->SendDebug("DataCorrection", $StationID, 0);
+				$StationID = $data->StationID;
+				$complaintType = $data->Field;
+				$Correction = $data->Value;
+				$Result = $this->sendComplaint($StationID, $complaintType, $Correction);
+				If ($Result == false) {
+					$this->SetStatus(202);
+				}
+				else {
+					$this->SetStatus(102);
+				}
+				break;
 		}
 	return $Result;
 	}
