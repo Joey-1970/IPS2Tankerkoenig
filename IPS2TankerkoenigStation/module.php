@@ -212,7 +212,7 @@
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	
-	public function SetDataUpdate(string $Brand, string $Name, string $Street, string $Housenumber, string $PostCode, string $Place)
+	public function SetDataUpdate(string $Brand, string $Name, string $Street, string $HouseNumber, string $PostCode, string $Place)
 	{
 		$this->SendDebug("SetDataUpdate", $Brand, 0);
 		$StationID = $this->ReadPropertyString("StationID");
