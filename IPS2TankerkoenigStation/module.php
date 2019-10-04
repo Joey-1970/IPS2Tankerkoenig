@@ -244,13 +244,9 @@
 		If ($Place <> $this->GetBuffer("Place")) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "StationID" => $StationID, "Field" => "wrongPetrolStationPlace", "Value" => $Place)));
-		
 		}
-		
-		
 	}
 	
-	    
 	private function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 	{
 	        if (!IPS_VariableProfileExists($Name))
