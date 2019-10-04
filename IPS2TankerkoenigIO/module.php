@@ -152,10 +152,13 @@
 	private function isValidUuid(string $UUID) 
 	{
     		if (preg_match('/^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$/', strtoupper($UUID))) {
-        		$this->SendDebug("isValidUuid", "UUID ist ungültig!", 0);
-		return true;
+        		//$this->SendDebug("isValidUuid", "UUID ist gültig", 0);
+			return true;
     		}
-    	return true;
+		else {
+			$this->SendDebug("isValidUuid", "UUID ist ungültig!", 0);
+			return false;
+    		}
 	}
 }
 ?>
