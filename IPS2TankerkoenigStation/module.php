@@ -216,22 +216,34 @@
 	{
 		$this->SendDebug("SetDataUpdate", $Brand, 0);
 		If ($Brand <>  $this->GetBuffer("Brand")) {
-			
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "Field" => "wrongPetrolStationBrand", "Value" => $Brand)));
+
 		}
 		If ($Name <> $this->GetBuffer("Name")) {
-			
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "Field" => "wrongPetrolStationName", "Value" => $Name)));
+
 		}
 		If ($Street <> $this->GetBuffer("Street")) {
-			
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "Field" => "wrongPetrolStationStreet", "Value" => $Street)));
+
 		}
 		If ($HouseNumber <> $this->GetBuffer("HouseNumber")) {
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "Field" => "wrongPetrolStationHouseNumber", "Value" => $HouseNumber)));
 			
 		}
 		If ($PostCode <> $this->GetBuffer("PostCode")) {
-			
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "Field" => "wrongPetrolStationPostcode", "Value" => $PostCode)));
+
 		}
 		If ($Place <> $this->GetBuffer("Place")) {
-			
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
+				"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "Field" => "wrongPetrolStationPlace", "Value" => $Place)));
+		
 		}
 		
 		
