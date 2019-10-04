@@ -26,12 +26,8 @@
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "ApiKey", "caption" => "Tankerkönig API-Key");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
-
 		
-		$arrayActions = array();
-		$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
-		
- 		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements, "actions" => $arrayActions)); 		 
+ 		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
 	   
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
@@ -39,15 +35,17 @@
         {
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
-		
-		// Profil anlegen
-		
-		
-		
+
 		If (IPS_GetKernelRunlevel() == 10103) {	
 		
 			If ($this->ReadPropertyBoolean("Open") == true) {
-				$this->SetStatus(102);
+				$ApiKey = $this->ReadPropertyString("ApiKey");
+				If ($this->isValidUuid($ApiKey)) {
+					$this->SetStatus(102);
+				}
+				else {
+					$this->SetStatus(104);
+				}
 			}
 			else {
 				$this->SetStatus(104);
