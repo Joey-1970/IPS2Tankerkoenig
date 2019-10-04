@@ -88,8 +88,8 @@
 				}
 				break;
 			case "DataCorrection":
-				$this->SendDebug("DataCorrection", $StationID, 0);
 				$StationID = $data->StationID;
+				$this->SendDebug("DataCorrection", $StationID, 0);
 				$complaintType = $data->Field;
 				$Correction = $data->Value;
 				$Result = $this->sendComplaint($StationID, $complaintType, $Correction);
