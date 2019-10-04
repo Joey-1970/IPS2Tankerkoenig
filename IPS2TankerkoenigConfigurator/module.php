@@ -23,6 +23,7 @@
 				
 		$arrayElements = array(); 
 		$arrayElements[] = array("type" => "SelectLocation", "name" => "Location", "caption" => "Region");
+		$arrayElements[] = array("type" => "Label", "label" => "Radius (gemäß Tankerkönig.de Maximum 25 km)");
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius (km)", "digits" => 1);
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arraySort = array();
@@ -81,6 +82,7 @@
 		$Lat = $locationObject['latitude'];
 		$Long = $locationObject['longitude']; 
 		$Radius = $this->ReadPropertyFloat("Radius");
+		$Radius = min(25, max(0, $Radius));
 		$StationArray = array();
 		If (($Lat <> 0) AND ($Long <> 0) AND ($Radius > 0)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
