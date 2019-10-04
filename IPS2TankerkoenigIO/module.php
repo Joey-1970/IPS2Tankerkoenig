@@ -40,12 +40,12 @@
 		
 			If ($this->ReadPropertyBoolean("Open") == true) {
 				$ApiKey = $this->ReadPropertyString("ApiKey");
-				If ($this->isValidUuid($ApiKey)) {
+				//If ($this->isValidUuid($ApiKey)) {
 					$this->SetStatus(102);
-				}
-				else {
+				//}
+				//else {
 					$this->SetStatus(104);
-				}
+				//}
 			}
 			else {
 				$this->SetStatus(104);
