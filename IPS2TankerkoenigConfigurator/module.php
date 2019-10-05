@@ -130,7 +130,7 @@
 	    	$Result = 0;
 	    	// Modulinstanzen suchen
 	    	$InstanceArray = array();
-	    	$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
+	    	@$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
 	    	foreach($InstanceArray as $Module) {
         		If (strtolower(IPS_GetProperty($Module, "StationID")) == strtolower($StationID)) {
             			$this->SendDebug("GetStationInstanceID", "Gefundene Instanz: ".$Module, 0);
