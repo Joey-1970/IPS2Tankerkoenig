@@ -214,9 +214,9 @@
 	
 	public function SetDataUpdate(string $Brand, string $Name, string $Street, string $HouseNumber, string $PostCode, string $Place)
 	{
+		$this->SendDebug("SetDataUpdate", $Brand, 0);
+		$StationID = $this->ReadPropertyString("StationID");
 		If (($this->isValidUuid($StationID)) AND ($this->HasActiveParent() == true)) {
-			$this->SendDebug("SetDataUpdate", $Brand, 0);
-			$StationID = $this->ReadPropertyString("StationID");
 			If ($Brand <>  $this->GetBuffer("Brand")) {
 				$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 					"Function" => "DataCorrection", "InstanceID" => $this->InstanceID, "StationID" => $StationID, "Field" => "wrongPetrolStationBrand", "Value" => $Brand)));
