@@ -53,10 +53,8 @@
 
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
-		$arrayActions = array();
-		$arrayActions[] = array("type" => "Label", "label" => "Diese Funktionen stehen erst nach Eingabe und Übernahme der erforderlichen Daten zur Verfügung!");
 		
- 		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements, "actions" => $arrayActions)); 		 
+ 		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
 	   
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
@@ -130,7 +128,7 @@
 	    	$Result = 0;
 	    	// Modulinstanzen suchen
 	    	$InstanceArray = array();
-	    	@$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
+	    	$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
 	    	foreach($InstanceArray as $Module) {
         		If (strtolower(IPS_GetProperty($Module, "StationID")) == strtolower($StationID)) {
             			$this->SendDebug("GetStationInstanceID", "Gefundene Instanz: ".$Module, 0);
