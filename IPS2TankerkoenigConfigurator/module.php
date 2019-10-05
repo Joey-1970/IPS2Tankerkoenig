@@ -128,17 +128,19 @@
 	    	$Result = 0;
 	    	// Modulinstanzen suchen
 	    	$InstanceArray = array();
-	    	$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
-	    	foreach($InstanceArray as $Module) {
-        		If (strtolower(IPS_GetProperty($Module, "StationID")) == strtolower($StationID)) {
-            			$this->SendDebug("GetStationInstanceID", "Gefundene Instanz: ".$Module, 0);
-				$Result = $Module;
-				break;
-        		}
-        		else {
-            			$Result = 0;
-        		}
-    		}
+	    	@$InstanceArray = (IPS_GetInstanceListByModuleID($guid));
+	    	If (is_array($InstanceArray)) {
+			foreach($InstanceArray as $Module) {
+				If (strtolower(IPS_GetProperty($Module, "StationID")) == strtolower($StationID)) {
+					$this->SendDebug("GetStationInstanceID", "Gefundene Instanz: ".$Module, 0);
+					$Result = $Module;
+					break;
+				}
+				else {
+					$Result = 0;
+				}
+			}
+		}
 	return $Result;
 	}
 }
