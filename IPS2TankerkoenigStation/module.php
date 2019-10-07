@@ -38,7 +38,7 @@
 		$this->RegisterVariableFloat("E5", "Super E5", "IPS2Tankerkoenig.Euro", 40);
 		$this->RegisterVariableFloat("E10", "Super E10", "IPS2Tankerkoenig.Euro", 50);
 		
-		$this->RegisterVariableInteger("State", "Status", "~IPS2Tankerkoenig.State", 60);
+		$this->RegisterVariableInteger("State", "Status", "IPS2Tankerkoenig.State", 60);
         }
  	
 	public function GetConfigurationForm() 
