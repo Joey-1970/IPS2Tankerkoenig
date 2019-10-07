@@ -25,6 +25,10 @@
 		// Profil anlegen
 		$this->RegisterProfileFloat("IPS2Tankerkoenig.Euro", "Euro", "", " €", 0, 1000, 0.001, 3);
 		
+		$this->RegisterProfileInteger("IPS2Tankerkoenig.State", "Information", "", "", 0, 1, 1);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 0, "Geöffnet", "LockOpen", 0x00FF00);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 1, "Geschlossen", "LockClosed", 0xFF0000);
+		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStation", "Tankstelle", "~HTMLBox", 10);
 		
@@ -33,6 +37,8 @@
 		$this->RegisterVariableFloat("Diesel", "Diesel", "IPS2Tankerkoenig.Euro", 30);
 		$this->RegisterVariableFloat("E5", "Super E5", "IPS2Tankerkoenig.Euro", 40);
 		$this->RegisterVariableFloat("E10", "Super E10", "IPS2Tankerkoenig.Euro", 50);
+		
+		$this->RegisterVariableInteger("State", "Status", "~IPS2Tankerkoenig.State", 60);
         }
  	
 	public function GetConfigurationForm() 
@@ -178,11 +184,13 @@
 				$table .= '<tr>';
 				$table .= '<td class="tg-611x">'."Aktuell geöffnet".'</td>';
 				$table .= '</tr>';
+				SetValueInteger($this->GetIDForIdent("State"), 0);
 			}
 			else {
 				$table .= '<tr>';
 				$table .= '<td class="tg-611x">'."Aktuell geschlossen".'</td>';
 				$table .= '</tr>';
+				SetValueInteger($this->GetIDForIdent("State"), 1);
 			}
 			foreach($ResultArray->station->overrides as $Closed) {
 				$table .= '<tr>';
@@ -260,6 +268,23 @@
 			return false;
     		}
 	}
+	
+	private function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+	{
+	        if (!IPS_VariableProfileExists($Name))
+	        {
+	            IPS_CreateVariableProfile($Name, 1);
+	        }
+	        else
+	        {
+	            $profile = IPS_GetVariableProfile($Name);
+	            if ($profile['ProfileType'] != 1)
+	                throw new Exception("Variable profile type does not match for profile " . $Name);
+	        }
+	        IPS_SetVariableProfileIcon($Name, $Icon);
+	        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+	        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);        
+	}    
 	    
 	private function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
 	{
