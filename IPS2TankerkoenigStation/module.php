@@ -25,9 +25,10 @@
 		// Profil anlegen
 		$this->RegisterProfileFloat("IPS2Tankerkoenig.Euro", "Euro", "", " €", 0, 1000, 0.001, 3);
 		
-		$this->RegisterProfileInteger("IPS2Tankerkoenig.State", "Information", "", "", 0, 1, 1);
-		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 0, "Geöffnet", "LockOpen", 0x00FF00);
-		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 1, "Geschlossen", "LockClosed", 0xFF0000);
+		$this->RegisterProfileInteger("IPS2Tankerkoenig.State", "Information", "", "", 0, 2, 1);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 0, "Unbekannt", "Information", -1);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 1, "Geöffnet", "LockOpen", 0x00FF00);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 2, "Geschlossen", "LockClosed", 0xFF0000);
 		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStation", "Tankstelle", "~HTMLBox", 10);
@@ -92,6 +93,7 @@
 		If (IPS_GetKernelRunlevel() == 10103) {	
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
+				SetValueInteger($this->GetIDForIdent("State"), 1);
 				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
 				If (strlen($this->ReadPropertyString("StationID")) > 0) {
 					$this->GetDataUpdate();
@@ -184,13 +186,13 @@
 				$table .= '<tr>';
 				$table .= '<td class="tg-611x">'."Aktuell geöffnet".'</td>';
 				$table .= '</tr>';
-				SetValueInteger($this->GetIDForIdent("State"), 0);
+				SetValueInteger($this->GetIDForIdent("State"), 1);
 			}
 			else {
 				$table .= '<tr>';
 				$table .= '<td class="tg-611x">'."Aktuell geschlossen".'</td>';
 				$table .= '</tr>';
-				SetValueInteger($this->GetIDForIdent("State"), 1);
+				SetValueInteger($this->GetIDForIdent("State"), 2);
 			}
 			foreach($ResultArray->station->overrides as $Closed) {
 				$table .= '<tr>';
