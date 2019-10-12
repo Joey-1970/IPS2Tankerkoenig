@@ -194,10 +194,19 @@
 			SetValueFloat($this->GetIDForIdent("E10"), $E10AVG);
 		}
 		// Tabelle aufbauen
-		$table = '<style type="text/css">';
+		//$table = '<style type="text/css">';
 		
-		
-		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
+		$table = '<!DOCTYPE html><html><head><meta charset="utf-8" /> ';
+        	$table .= '<link href="//db.onlinewebfonts.com/c/292662136c79f326952c07f076a4e7f9?family=Advanced+Pixel+LCD-7" ';
+        	$table .= 'rel="stylesheet" type="text/css"/> <style>@font-face {font-family: "Advanced Pixel LCD-7"; ';
+        	$table .= 'src: url("//db.onlinewebfonts.com/t/292662136c79f326952c07f076a4e7f9.eot"); ';
+        	$table .= 'src: url("//db.onlinewebfonts.com/t/292662136c79f326952c07f076a4e7f9.eot?#iefix") format("embedded-opentype"), ';
+		$table .= 'url("//db.onlinewebfonts.com/t/292662136c79f326952c07f076a4e7f9.woff2") format("woff2"), ';
+		$table .= 'url("//db.onlinewebfonts.com/t/292662136c79f326952c07f076a4e7f9.woff") format("woff"), ';
+		$table .= 'url("//db.onlinewebfonts.com/t/292662136c79f326952c07f076a4e7f9.ttf") format("truetype"), ';
+		$table .= 'url("//db.onlinewebfonts.com/t/292662136c79f326952c07f076a4e7f9.svg#Advanced Pixel LCD-7") format("svg"); } ';
+		$table .= '.LCD{font-family: \'Advanced Pixel LCD-7\'} ';
+		//$table .= '<link rel="stylesheet" href="./.../webfront.css">';
 		$table .= "</style>";
 		$table .= '<table class="tg">';
 		$table .= "<tr>";
