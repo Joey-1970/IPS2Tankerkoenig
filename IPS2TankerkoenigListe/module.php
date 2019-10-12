@@ -193,18 +193,10 @@
 		If ($E10AVG <> GetValueFloat($this->GetIDForIdent("E10"))) {
 			SetValueFloat($this->GetIDForIdent("E10"), $E10AVG);
 		}
-		// Schriftartpfad
-		set_include_path(__DIR__.'/../libs');
-		$FileName = (__DIR__ .'/../libs/advanced_pixel_lcd-7.ttf');
-		if (file_exists($FileName)) {
-			$this->SendDebug("ShowResult", "Datei ".$FileName." gefunden!", 0);
-		}
-		else {
-			$this->SendDebug("ShowResult", "Datei ".$FileName." nicht gefunden!", 0);
-		}
-		
 		// Tabelle aufbauen
 		$table = '<style type="text/css">';
+		
+		
 		$table .= '<link rel="stylesheet" href="./.../webfront.css">';
 		$table .= "</style>";
 		$table .= '<table class="tg">';
