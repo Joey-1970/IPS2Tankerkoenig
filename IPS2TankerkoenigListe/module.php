@@ -215,13 +215,13 @@
 		$table .= '<th class="tg-kv4b">Name</th>';
 		$table .= '<th class="tg-kv4b">Ort<br></th>';
 		If ($this->ReadPropertyBoolean("Diesel") == true) { 
-        		$table .= '<th class="tg-kv4b">Diesel<br></th>';
+        		$table .= '<th class="tg-kv4b">Diesel (€/l)<br></th>';
 		}
 		If ($this->ReadPropertyBoolean("E5") == true) { 
-        		$table .= '<th class="tg-kv4b">Super E5<br></th>';
+        		$table .= '<th class="tg-kv4b">Super E5 (€/l)<br></th>';
 		}
 		If ($this->ReadPropertyBoolean("E10") == true) { 
-        		$table .= '<th class="tg-kv4b">Super E10<br></th>';
+        		$table .= '<th class="tg-kv4b">Super E10 (€/l)<br></th>';
 		}
         	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
@@ -238,7 +238,7 @@
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
 					If (floatval($Stations->diesel) == $Diesel) {
-						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel." €".'</font> </td>';
+						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel.'</font> </td>';
 					}
 					else {
 						$table .= $Font.$Stations->diesel." €".'</font> </td>';
@@ -246,7 +246,7 @@
 				}
 				If ($this->ReadPropertyBoolean("E5") == true) {
 					If (floatval($Stations->e5) == $E5) {
-						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e5." €".'</font> </td>';
+						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e5.'</font> </td>';
 					}
 					else {
 						$table .= $Font.$Stations->e5." €".'</font> </td>';
@@ -254,7 +254,7 @@
 				}
 				If ($this->ReadPropertyBoolean("E10") == true) {
 					If (floatval($Stations->e10) == $E10) {
-						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e10." €".'</font> </td>';
+						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e10.'</font> </td>';
 					}
 					else {
 						$table .= $Font.$Stations->e10." €".'</font> </td>';
@@ -277,7 +277,7 @@
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 					If ($this->ReadPropertyBoolean("Diesel") == true) {
 						If (floatval($Stations->diesel) == $Diesel) {
-							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel." €".'</font> </td>';
+							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel.'</font> </td>';
 						}
 						else {
 							$table .= $Font.$Stations->diesel." €".'</font> </td>';
@@ -285,7 +285,7 @@
 					}
 					If ($this->ReadPropertyBoolean("E5") == true) {
 						If (floatval($Stations->e5) == $E5) {
-							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e5." €".'</font> </td>';
+							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e5.'</font> </td>';
 						}
 						else {
 							$table .= $Font.$Stations->e5." €".'</font> </td>';
@@ -293,7 +293,7 @@
 					}
 					If ($this->ReadPropertyBoolean("E10") == true) {
 						If (floatval($Stations->e10) == $E10) {
-							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e10." €".'</font> </td>';
+							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e10.'</font> </td>';
 						}
 						else {
 							$table .= $Font.$Stations->e10." €".'</font> </td>';
