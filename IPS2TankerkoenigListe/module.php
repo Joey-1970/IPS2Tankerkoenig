@@ -130,7 +130,7 @@
 		$ResultArray = array();
 		$ResultArray = json_decode($Text);
 		$ColorCode = "#00FF00";
-		$Font = '<td class="LCD"><p style="font-size:10px"><p style="text-align:center">';
+		$Font = '<td class="LCD"><p style="font-size:10px" "text-align:center">';
 		// Fehlerbehandlung
 		If (boolval($ResultArray->ok) == false) {
 			$this->SendDebug("ShowResult", "Fehler bei der Datenermittlung: ".utf8_encode($ResultArray->message), 0);
