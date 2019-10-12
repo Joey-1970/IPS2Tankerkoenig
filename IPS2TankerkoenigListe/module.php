@@ -241,7 +241,7 @@
 						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel.'</font> </td>';
 					}
 					else {
-						$table .= $Font.$Stations->diesel." €".'</font> </td>';
+						$table .= $Font.$Stations->diesel.'</font> </td>';
 					}
 				}
 				If ($this->ReadPropertyBoolean("E5") == true) {
@@ -249,7 +249,7 @@
 						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e5.'</font> </td>';
 					}
 					else {
-						$table .= $Font.$Stations->e5." €".'</font> </td>';
+						$table .= $Font.$Stations->e5.'</font> </td>';
 					}
 				}
 				If ($this->ReadPropertyBoolean("E10") == true) {
@@ -257,7 +257,7 @@
 						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e10.'</font> </td>';
 					}
 					else {
-						$table .= $Font.$Stations->e10." €".'</font> </td>';
+						$table .= $Font.$Stations->e10.'</font> </td>';
 					}
 				}
 				If ($Stations->isOpen == true) {
@@ -280,7 +280,7 @@
 							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel.'</font> </td>';
 						}
 						else {
-							$table .= $Font.$Stations->diesel." €".'</font> </td>';
+							$table .= $Font.$Stations->diesel.'</font> </td>';
 						}
 					}
 					If ($this->ReadPropertyBoolean("E5") == true) {
@@ -288,7 +288,7 @@
 							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e5.'</font> </td>';
 						}
 						else {
-							$table .= $Font.$Stations->e5." €".'</font> </td>';
+							$table .= $Font.$Stations->e5.'</font> </td>';
 						}
 					}
 					If ($this->ReadPropertyBoolean("E10") == true) {
@@ -296,7 +296,7 @@
 							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->e10.'</font> </td>';
 						}
 						else {
-							$table .= $Font.$Stations->e10." €".'</font> </td>';
+							$table .= $Font.$Stations->e10.'</font> </td>';
 						}
 					}
 					$StationID = $Stations->id;
