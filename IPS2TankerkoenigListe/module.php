@@ -215,13 +215,13 @@
 		$table .= '<th class="tg-kv4b">Name</th>';
 		$table .= '<th class="tg-kv4b">Ort<br></th>';
 		If ($this->ReadPropertyBoolean("Diesel") == true) { 
-        		$table .= '<th class="tg-kv4b">Diesel (€/l)<br></th>';
+        		$table .= '<th class="tg-kv4b">Diesel<br></th>';
 		}
 		If ($this->ReadPropertyBoolean("E5") == true) { 
-        		$table .= '<th class="tg-kv4b">Super E5 (€/l)<br></th>';
+        		$table .= '<th class="tg-kv4b">Super E5<br></th>';
 		}
 		If ($this->ReadPropertyBoolean("E10") == true) { 
-        		$table .= '<th class="tg-kv4b">Super E10 (€/l)<br></th>';
+        		$table .= '<th class="tg-kv4b">Super E10<br></th>';
 		}
         	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
