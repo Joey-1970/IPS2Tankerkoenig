@@ -82,20 +82,13 @@
 		
 		SetValueString($this->GetIDForIdent("PetrolStationDetail"), "");
 		
-		If (IPS_GetKernelRunlevel() == 10103) {	
-			If ($this->HasActiveParent() == true) {
-				$this->SetStatus(102);
-				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
-				If ($this->ReadPropertyFloat("Radius") > 0) {
-					$this->GetDataUpdate();
-				}
-				else {
-					$this->SendDebug("GetDataUpdate", "Keine Koordinaten verfügbar!", 0);
-				}
-			}
-			else {
-				$this->SetStatus(104);
-			}
+		$this->SetStatus(102);
+		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
+		If ($this->ReadPropertyFloat("Radius") > 0) {
+			$this->GetDataUpdate();
+		}
+		else {
+			$this->SendDebug("GetDataUpdate", "Radius <= 0!", 0);
 		}
 	}
 	    
@@ -107,7 +100,7 @@
 		$Long = $locationObject['longitude'];  
 		$Radius = $this->ReadPropertyFloat("Radius");
 		$Radius = min(25, max(0, $Radius));
-		If (($Lat <> 0) AND ($Long <> 0) AND ($Radius > 0)) {
+		If (($Lat <> 0) AND ($Long <> 0) AND ($Radius > 0) AND ($this->HasActiveParent() == true)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 			If ($Result <> false) {
