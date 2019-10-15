@@ -93,7 +93,7 @@
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
-		If ($this->isValidUuid($this->ReadPropertyString("StationID")) {
+		If ($this->isValidUuid($this->ReadPropertyString("StationID")) == true) {
 			$this->GetDataUpdate();
 		}
 		else {
