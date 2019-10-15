@@ -90,21 +90,14 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 		
-		If (IPS_GetKernelRunlevel() == 10103) {	
-			If ($this->HasActiveParent() == true) {
-				$this->SetStatus(102);
-				SetValueInteger($this->GetIDForIdent("State"), 1);
-				$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
-				If (strlen($this->ReadPropertyString("StationID")) > 0) {
-					$this->GetDataUpdate();
-				}
-				else {
-					$this->SendDebug("GetDataUpdate", "Keine Tnkstellen ID verfügbar!", 0);
-				}
-			}
-			else {
-				$this->SetStatus(104);
-			}
+		$this->SetStatus(102);
+		SetValueInteger($this->GetIDForIdent("State"), 1);
+		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
+		If ($this->isValidUuid($this->ReadPropertyString("StationID")) {
+			$this->GetDataUpdate();
+		}
+		else {
+			$this->SendDebug("GetDataUpdate", "Keine gueltige Tankstellen ID verfügbar!", 0);
 		}
 	}
 	    
