@@ -80,6 +80,8 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 		
+		$this->RegisterMessage($this->InstanceID, 10103);
+		
 		SetValueString($this->GetIDForIdent("PetrolStationDetail"), "");
 		
 		$this->SetStatus(102);
@@ -91,6 +93,16 @@
 			$this->SendDebug("GetDataUpdate", "Radius <= 0!", 0);
 		}
 	}
+	
+	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    	{
+ 		switch ($Message) {
+			case 10103:
+				$this->ApplyChanges();
+				break;
+			
+		}
+    	}          
 	    
 	// Beginn der Funktionen
 	public function GetDataUpdate()
@@ -116,8 +128,8 @@
 		else {
 			$this->SendDebug("GetDataUpdate", "Keine Koordinaten verfügbar!", 0);
 		}
-	}
-	
+	}  
+	    
 	private function ShowResult(string $Text)
 	{
 		$ResultArray = array();
