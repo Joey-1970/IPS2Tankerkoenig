@@ -89,7 +89,7 @@
         {
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
-		
+		$this->RegisterMessage($this->InstanceID, 10103);
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
@@ -100,6 +100,16 @@
 			$this->SendDebug("GetDataUpdate", "Keine gueltige Tankstellen ID verfügbar!", 0);
 		}
 	}
+	
+	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    	{
+ 		switch ($Message) {
+			case 10103:
+				$this->ApplyChanges();
+				break;
+			
+		}
+    	}
 	    
 	// Beginn der Funktionen
 	public function GetDataUpdate()
