@@ -21,6 +21,7 @@
 		$this->RegisterPropertyBoolean("Diesel", true);
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
+		$this->RegisterPropertyBoolean("Statistics", false);
 		
 		// Profil anlegen
 		$this->RegisterProfileFloat("IPS2Tankerkoenig.Euro", "Euro", "", " €", 0, 1000, 0.001, 3);
@@ -57,8 +58,9 @@
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Sorten");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "Diesel", "caption" => "Diesel"); 
-		$arrayElements[] = array("type" => "CheckBox", "name" => "E5", "caption" => "Super E5");
-		$arrayElements[] = array("type" => "CheckBox", "name" => "E10", "caption" => "Super E10");
+		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
+		$arrayElements[] = array("type" => "Label", "label" => "Statistik (experimentell) - geloggte Variablen erforderlich");
+		$arrayElements[] = array("type" => "CheckBox", "name" => "Statistics", "caption" => "Aktiv"); 
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
 		$arrayActions = array();
