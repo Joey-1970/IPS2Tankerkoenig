@@ -295,7 +295,7 @@
         	}
         	else {
             		SetValueFloat($MaxID, 0);
-			SetValueFloat($AvgID, 0));
+			SetValueFloat($AvgID, 0);
 			SetValueFloat($MinID, 0);
         	}
 	}
