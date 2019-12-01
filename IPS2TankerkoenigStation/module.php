@@ -227,15 +227,15 @@
 		$Diesel = floatval($ResultArray->station->diesel);
 		$E5 = floatval($ResultArray->station->e5);
 		$E10 = floatval($ResultArray->station->e10);
-		//If ($Diesel <> GetValueFloat($this->GetIDForIdent("Diesel"))) {
+		If ($Diesel <> GetValueFloat($this->GetIDForIdent("Diesel"))) {
 			SetValueFloat($this->GetIDForIdent("Diesel"), $Diesel);
-		//}
-		//If ($E5 <> GetValueFloat($this->GetIDForIdent("E5"))) {
+		}
+		If ($E5 <> GetValueFloat($this->GetIDForIdent("E5"))) {
 			SetValueFloat($this->GetIDForIdent("E5"), $E5);
-		//}
-		//If ($E10 <> GetValueFloat($this->GetIDForIdent("E10"))) {
+		}
+		If ($E10 <> GetValueFloat($this->GetIDForIdent("E10"))) {
 			SetValueFloat($this->GetIDForIdent("E10"), $E10);
-		//}
+		}
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	
@@ -276,7 +276,7 @@
 		}
 	}
 	
-	private function Statistics()
+	private function Statistics(int $InstanceID)
 	{
 		$LoggingArray = @AC_GetLoggedValues(IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0], $InstanceID, time()- (3600 * 24 * 7), time(), 0); 
         	If (is_array($LoggingArray)) {
