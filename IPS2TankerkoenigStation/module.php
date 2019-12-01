@@ -94,6 +94,18 @@
 		$this->RegisterMessage($this->InstanceID, 10103);
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
+		If ($this->ReadPropertyBoolean("Statistics") == true) {
+			$this->RegisterVariableFloat("Diesel7DaysMin", "Diesel Min", "IPS2Tankerkoenig.Euro", 100);
+			$this->RegisterVariableFloat("Diesel7DaysAVG", "Diesel Avg", "IPS2Tankerkoenig.Euro", 110);
+			$this->RegisterVariableFloat("Diesel7DaysMax", "Diesel Max", "IPS2Tankerkoenig.Euro", 120);
+			$this->RegisterVariableFloat("E57DaysMin", "Super E5 Min", "IPS2Tankerkoenig.Euro", 130);
+			$this->RegisterVariableFloat("E57DaysAVG", "Super E5 Avg", "IPS2Tankerkoenig.Euro", 140);
+			$this->RegisterVariableFloat("E57DaysMax", "Super E5 Max", "IPS2Tankerkoenig.Euro", 150);
+			$this->RegisterVariableFloat("E107DaysMin", "Super E10 Min", "IPS2Tankerkoenig.Euro", 160);
+			$this->RegisterVariableFloat("E107DaysAVG", "Super E10 Avg", "IPS2Tankerkoenig.Euro", 170);
+			$this->RegisterVariableFloat("E107DaysMax", "Super E10 Max", "IPS2Tankerkoenig.Euro", 180);
+		}
+		
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
 		If ($this->isValidUuid($this->ReadPropertyString("StationID")) == true) {
 			$this->GetDataUpdate();
@@ -264,6 +276,25 @@
 		}
 	}
 	
+	private function Statistics()
+	{
+		$LoggingArray = @AC_GetLoggedValues(IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0], $InstanceID, time()- (3600 * 24 * 7), time(), 0); 
+        	If (is_array($LoggingArray)) {
+            		$PriceArray = array();
+            		foreach ($LoggingArray as $Data) {
+                		$PriceArray[] = $Data["Value"];
+            		}
+            		echo max($PriceArray). "\n";
+            		echo min($PriceArray). "\n";
+            		echo array_sum($PriceArray)/count($PriceArray);
+        	}
+        	else {
+            		echo "0\n";
+            		echo "0\n";
+            		echo "0";
+        	}
+	}
+	    
 	private function isValidUuid(string $UUID) 
 	{
     		if (preg_match('/^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$/', strtoupper($UUID))) {
