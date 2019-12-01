@@ -58,6 +58,8 @@
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Sorten");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "Diesel", "caption" => "Diesel"); 
+		$arrayElements[] = array("type" => "CheckBox", "name" => "E5", "caption" => "Super E5"); 
+		$arrayElements[] = array("type" => "CheckBox", "name" => "E10", "caption" => "Super E10"); 
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Label", "label" => "Statistik (experimentell) - geloggte Variablen erforderlich");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "Statistics", "caption" => "Aktiv"); 
