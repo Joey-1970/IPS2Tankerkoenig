@@ -236,6 +236,11 @@
 		If ($E10 <> GetValueFloat($this->GetIDForIdent("E10"))) {
 			SetValueFloat($this->GetIDForIdent("E10"), $E10);
 		}
+		If ($this->ReadPropertyBoolean("Statistics") == true) {
+			$this->Statistics($this->GetIDForIdent("Diesel"), $this->GetIDForIdent("Diesel7DaysMax"), $this->GetIDForIdent("Diesel7DaysAVG"), $this->GetIDForIdent("Diesel7DaysMin"));
+			$this->Statistics($this->GetIDForIdent("E5"), $this->GetIDForIdent("E57DaysMax"), $this->GetIDForIdent("E57DaysAVG"), $this->GetIDForIdent("E57DaysMin"));
+			$this->Statistics($this->GetIDForIdent("E10"), $this->GetIDForIdent("E107DaysMax"), $this->GetIDForIdent("E107DaysAVG"), $this->GetIDForIdent("E107DaysMin"));
+		}
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
 	
@@ -276,7 +281,7 @@
 		}
 	}
 	
-	private function Statistics(int $InstanceID)
+	private function Statistics(int $InstanceID, int $MaxID, int $AvgID, int $MinID)
 	{
 		$LoggingArray = @AC_GetLoggedValues(IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0], $InstanceID, time()- (3600 * 24 * 7), time(), 0); 
         	If (is_array($LoggingArray)) {
@@ -284,14 +289,14 @@
             		foreach ($LoggingArray as $Data) {
                 		$PriceArray[] = $Data["Value"];
             		}
-            		echo max($PriceArray). "\n";
-            		echo min($PriceArray). "\n";
-            		echo array_sum($PriceArray)/count($PriceArray);
+            		SetValueFloat($MaxID, max($PriceArray));
+			SetValueFloat($AvgID, max(array_sum($PriceArray)/count($PriceArray)));
+			SetValueFloat($MinID, min($PriceArray));
         	}
         	else {
-            		echo "0\n";
-            		echo "0\n";
-            		echo "0";
+            		SetValueFloat($MaxID, 0);
+			SetValueFloat($AvgID, 0));
+			SetValueFloat($MinID, 0);
         	}
 	}
 	    
