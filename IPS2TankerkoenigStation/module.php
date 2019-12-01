@@ -290,7 +290,7 @@
                 		$PriceArray[] = $Data["Value"];
             		}
             		SetValueFloat($MaxID, max($PriceArray));
-			SetValueFloat($AvgID, max(array_sum($PriceArray)/count($PriceArray)));
+			SetValueFloat($AvgID, array_sum($PriceArray)/count($PriceArray));
 			SetValueFloat($MinID, min($PriceArray));
         	}
         	else {
