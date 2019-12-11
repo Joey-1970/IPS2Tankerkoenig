@@ -106,6 +106,9 @@
 			$this->RegisterVariableFloat("E107DaysMin", "Super E10 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 160);
 			$this->RegisterVariableFloat("E107DaysAVG", "Super E10 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 170);
 			$this->RegisterVariableFloat("E107DaysMax", "Super E10 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 180);
+			$this->RegisterVariableBoolean("DieselMinPrice", "Diesel Minimum Preis", "~Switch", 190);
+			$this->RegisterVariableBoolean("E5MinPrice", "E5 Minimum Preis", "~Switch", 200);
+			$this->RegisterVariableBoolean("E10MinPrice", "E10 Minimum Preis", "~Switch", 210);
 		}
 		
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
@@ -239,9 +242,9 @@
 			SetValueFloat($this->GetIDForIdent("E10"), $E10);
 		}
 		If ($this->ReadPropertyBoolean("Statistics") == true) {
-			$this->Statistics($this->GetIDForIdent("Diesel"), $this->GetIDForIdent("Diesel7DaysMax"), $this->GetIDForIdent("Diesel7DaysAVG"), $this->GetIDForIdent("Diesel7DaysMin"));
-			$this->Statistics($this->GetIDForIdent("E5"), $this->GetIDForIdent("E57DaysMax"), $this->GetIDForIdent("E57DaysAVG"), $this->GetIDForIdent("E57DaysMin"));
-			$this->Statistics($this->GetIDForIdent("E10"), $this->GetIDForIdent("E107DaysMax"), $this->GetIDForIdent("E107DaysAVG"), $this->GetIDForIdent("E107DaysMin"));
+			$this->Statistics($this->GetIDForIdent("Diesel"), $this->GetIDForIdent("Diesel7DaysMax"), $this->GetIDForIdent("Diesel7DaysAVG"), $this->GetIDForIdent("Diesel7DaysMin"), $this->GetIDForIdent("DieselMinPrice"), $Diesel);
+			$this->Statistics($this->GetIDForIdent("E5"), $this->GetIDForIdent("E57DaysMax"), $this->GetIDForIdent("E57DaysAVG"), $this->GetIDForIdent("E57DaysMin"), $this->GetIDForIdent("E5MinPrice"), $E5);
+			$this->Statistics($this->GetIDForIdent("E10"), $this->GetIDForIdent("E107DaysMax"), $this->GetIDForIdent("E107DaysAVG"), $this->GetIDForIdent("E107DaysMin"), $this->GetIDForIdent("E10MinPrice"), $E10);
 		}
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
@@ -283,7 +286,7 @@
 		}
 	}
 	
-	private function Statistics(int $InstanceID, int $MaxID, int $AvgID, int $MinID)
+	private function Statistics(int $InstanceID, int $MaxID, int $AvgID, int $MinID, int $MinPriceID, float $Price)
 	{
 		$LoggingArray = @AC_GetLoggedValues(IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0], $InstanceID, time()- (3600 * 24 * 7), time(), 0); 
         	If (is_array($LoggingArray)) {
@@ -293,12 +296,20 @@
             		}
             		SetValueFloat($MaxID, max($PriceArray));
 			SetValueFloat($AvgID, array_sum($PriceArray)/count($PriceArray));
-			SetValueFloat($MinID, min($PriceArray));
+			$7DaysMinPrice  = min($PriceArray);
+			SetValueFloat($MinID, $7DaysMinPrice);
+			If ($7DaysMinPrice < $Price) {
+				SetValueBoolean($MinPriceID, false);
+			}
+			else {
+				SetValueBoolean($MinPriceID, true);
+			}
         	}
         	else {
             		SetValueFloat($MaxID, 0);
 			SetValueFloat($AvgID, 0);
 			SetValueFloat($MinID, 0);
+			SetValueBoolean($MinPriceID, false);
         	}
 	}
 	    
