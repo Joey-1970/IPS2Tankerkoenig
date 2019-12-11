@@ -97,17 +97,20 @@
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
 		If ($this->ReadPropertyBoolean("Statistics") == true) {
+			
 			$this->RegisterVariableFloat("Diesel7DaysMin", "Diesel 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 100);
 			$this->RegisterVariableFloat("Diesel7DaysAVG", "Diesel 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 110);
 			$this->RegisterVariableFloat("Diesel7DaysMax", "Diesel 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 120);
+			$this->RegisterVariableBoolean("DieselMinPrice", "Diesel Minimum Preis", "~Switch", 190);
+			
 			$this->RegisterVariableFloat("E57DaysMin", "Super E5 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 130);
 			$this->RegisterVariableFloat("E57DaysAVG", "Super E5 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 140);
 			$this->RegisterVariableFloat("E57DaysMax", "Super E5 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 150);
+			$this->RegisterVariableBoolean("E5MinPrice", "E5 Minimum Preis", "~Switch", 200);
+			
 			$this->RegisterVariableFloat("E107DaysMin", "Super E10 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 160);
 			$this->RegisterVariableFloat("E107DaysAVG", "Super E10 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 170);
 			$this->RegisterVariableFloat("E107DaysMax", "Super E10 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 180);
-			$this->RegisterVariableBoolean("DieselMinPrice", "Diesel Minimum Preis", "~Switch", 190);
-			$this->RegisterVariableBoolean("E5MinPrice", "E5 Minimum Preis", "~Switch", 200);
 			$this->RegisterVariableBoolean("E10MinPrice", "E10 Minimum Preis", "~Switch", 210);
 		}
 		
