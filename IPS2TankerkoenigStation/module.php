@@ -96,22 +96,26 @@
 		$this->RegisterMessage($this->InstanceID, 10103);
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
+		
 		If ($this->ReadPropertyBoolean("Statistics") == true) {
-			
-			$this->RegisterVariableFloat("Diesel7DaysMin", "Diesel 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 100);
-			$this->RegisterVariableFloat("Diesel7DaysAVG", "Diesel 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 110);
-			$this->RegisterVariableFloat("Diesel7DaysMax", "Diesel 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 120);
-			$this->RegisterVariableBoolean("DieselMinPrice", "Diesel Minimum Preis", "~Switch", 190);
-			
-			$this->RegisterVariableFloat("E57DaysMin", "Super E5 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 130);
-			$this->RegisterVariableFloat("E57DaysAVG", "Super E5 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 140);
-			$this->RegisterVariableFloat("E57DaysMax", "Super E5 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 150);
-			$this->RegisterVariableBoolean("E5MinPrice", "E5 Minimum Preis", "~Switch", 200);
-			
-			$this->RegisterVariableFloat("E107DaysMin", "Super E10 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 160);
-			$this->RegisterVariableFloat("E107DaysAVG", "Super E10 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 170);
-			$this->RegisterVariableFloat("E107DaysMax", "Super E10 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 180);
-			$this->RegisterVariableBoolean("E10MinPrice", "E10 Minimum Preis", "~Switch", 210);
+			If ($this->ReadPropertyBoolean("Diesel") == true) {
+				$this->RegisterVariableFloat("Diesel7DaysMin", "Diesel 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 100);
+				$this->RegisterVariableFloat("Diesel7DaysAVG", "Diesel 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 110);
+				$this->RegisterVariableFloat("Diesel7DaysMax", "Diesel 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 120);
+				$this->RegisterVariableBoolean("DieselMinPrice", "Diesel Minimum Preis", "~Switch", 190);
+			}
+			If ($this->ReadPropertyBoolean("E5") == true) {
+				$this->RegisterVariableFloat("E57DaysMin", "Super E5 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 130);
+				$this->RegisterVariableFloat("E57DaysAVG", "Super E5 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 140);
+				$this->RegisterVariableFloat("E57DaysMax", "Super E5 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 150);
+				$this->RegisterVariableBoolean("E5MinPrice", "E5 Minimum Preis", "~Switch", 200);
+			}
+			If ($this->ReadPropertyBoolean("E10") == true) {
+				$this->RegisterVariableFloat("E107DaysMin", "Super E10 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 160);
+				$this->RegisterVariableFloat("E107DaysAVG", "Super E10 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 170);
+				$this->RegisterVariableFloat("E107DaysMax", "Super E10 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 180);
+				$this->RegisterVariableBoolean("E10MinPrice", "E10 Minimum Preis", "~Switch", 210);
+			}
 		}
 		
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
@@ -245,9 +249,15 @@
 			SetValueFloat($this->GetIDForIdent("E10"), $E10);
 		}
 		If ($this->ReadPropertyBoolean("Statistics") == true) {
-			$this->Statistics($this->GetIDForIdent("Diesel"), $this->GetIDForIdent("Diesel7DaysMax"), $this->GetIDForIdent("Diesel7DaysAVG"), $this->GetIDForIdent("Diesel7DaysMin"), $this->GetIDForIdent("DieselMinPrice"), $Diesel);
-			$this->Statistics($this->GetIDForIdent("E5"), $this->GetIDForIdent("E57DaysMax"), $this->GetIDForIdent("E57DaysAVG"), $this->GetIDForIdent("E57DaysMin"), $this->GetIDForIdent("E5MinPrice"), $E5);
-			$this->Statistics($this->GetIDForIdent("E10"), $this->GetIDForIdent("E107DaysMax"), $this->GetIDForIdent("E107DaysAVG"), $this->GetIDForIdent("E107DaysMin"), $this->GetIDForIdent("E10MinPrice"), $E10);
+			If ($this->ReadPropertyBoolean("Diesel") == true) {
+				$this->Statistics($this->GetIDForIdent("Diesel"), $this->GetIDForIdent("Diesel7DaysMax"), $this->GetIDForIdent("Diesel7DaysAVG"), $this->GetIDForIdent("Diesel7DaysMin"), $this->GetIDForIdent("DieselMinPrice"), $Diesel);
+			}
+			If ($this->ReadPropertyBoolean("E5") == true) {
+				$this->Statistics($this->GetIDForIdent("E5"), $this->GetIDForIdent("E57DaysMax"), $this->GetIDForIdent("E57DaysAVG"), $this->GetIDForIdent("E57DaysMin"), $this->GetIDForIdent("E5MinPrice"), $E5);
+			}
+			If ($this->ReadPropertyBoolean("E10") == true) {
+				$this->Statistics($this->GetIDForIdent("E10"), $this->GetIDForIdent("E107DaysMax"), $this->GetIDForIdent("E107DaysAVG"), $this->GetIDForIdent("E107DaysMin"), $this->GetIDForIdent("E10MinPrice"), $E10);
+			}
 		}
 		SetValueInteger($this->GetIDForIdent("LastUpdate"), time() );
 	}
