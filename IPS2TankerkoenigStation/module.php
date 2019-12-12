@@ -36,10 +36,6 @@
 		
 		$this->RegisterVariableInteger("LastUpdate", "Letztes Update", "~UnixTimestamp", 20);
 			
-		$this->RegisterVariableFloat("Diesel", "Diesel", "IPS2Tankerkoenig.Euro", 30);
-		$this->RegisterVariableFloat("E5", "Super E5", "IPS2Tankerkoenig.Euro", 40);
-		$this->RegisterVariableFloat("E10", "Super E10", "IPS2Tankerkoenig.Euro", 50);
-		
 		$this->RegisterVariableInteger("State", "Status", "IPS2Tankerkoenig.State", 60);
         }
  	
@@ -96,6 +92,16 @@
 		$this->RegisterMessage($this->InstanceID, 10103);
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
+		
+		If ($this->ReadPropertyBoolean("Diesel") == true) {
+			$this->RegisterVariableFloat("Diesel", "Diesel", "IPS2Tankerkoenig.Euro", 30);	
+		}
+		If ($this->ReadPropertyBoolean("E5") == true) {
+			$this->RegisterVariableFloat("E5", "Super E5", "IPS2Tankerkoenig.Euro", 40);
+		}
+		If ($this->ReadPropertyBoolean("E10") == true) {
+			$this->RegisterVariableFloat("E10", "Super E10", "IPS2Tankerkoenig.Euro", 50);
+		}
 		
 		If ($this->ReadPropertyBoolean("Statistics") == true) {
 			If ($this->ReadPropertyBoolean("Diesel") == true) {
