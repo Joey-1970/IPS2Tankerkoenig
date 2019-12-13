@@ -327,7 +327,7 @@
 			If ($SevenDaysMinPrice < $Price) {
 				SetValueInteger($MinPriceID, 3);
 			}
-			elseIf (($SevenDaysMinPrice + 1.0) == $Price) {
+			elseIf (($SevenDaysMinPrice + 0.01) == $Price) {
 				SetValueInteger($MinPriceID, 2);
 			}
 			else {
