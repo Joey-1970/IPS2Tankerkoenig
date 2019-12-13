@@ -31,6 +31,11 @@
 		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 1, "Geöffnet", "LockOpen", 0x00FF00);
 		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 2, "Geschlossen", "LockClosed", 0xFF0000);
 		
+		$this->RegisterProfileInteger("IPS2Tankerkoenig.Price", "Information", "", "", 0, 2, 1);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 0, "Unbekannt", "Information", -1);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 1, "Ideal", "Ok", 0x00FF00);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 2, "Normal", "Close", 0xFF0000);
+		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStation", "Tankstelle", "~HTMLBox", 10);
 		
@@ -108,19 +113,19 @@
 				$this->RegisterVariableFloat("Diesel7DaysMin", "Diesel 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 100);
 				$this->RegisterVariableFloat("Diesel7DaysAVG", "Diesel 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 110);
 				$this->RegisterVariableFloat("Diesel7DaysMax", "Diesel 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 120);
-				$this->RegisterVariableBoolean("DieselMinPrice", "Diesel Minimum Preis", "~Switch", 190);
+				$this->RegisterVariableInteger("DieselMinPrice", "Diesel Minimum Preis", "IPS2Tankerkoenig.Price", 190);
 			}
 			If ($this->ReadPropertyBoolean("E5") == true) {
 				$this->RegisterVariableFloat("E57DaysMin", "Super E5 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 130);
 				$this->RegisterVariableFloat("E57DaysAVG", "Super E5 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 140);
 				$this->RegisterVariableFloat("E57DaysMax", "Super E5 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 150);
-				$this->RegisterVariableBoolean("E5MinPrice", "E5 Minimum Preis", "~Switch", 200);
+				$this->RegisterVariableInteger("E5MinPrice", "E5 Minimum Preis", "IPS2Tankerkoenig.Price", 200);
 			}
 			If ($this->ReadPropertyBoolean("E10") == true) {
 				$this->RegisterVariableFloat("E107DaysMin", "Super E10 7-Tages Minimum", "IPS2Tankerkoenig.Euro", 160);
 				$this->RegisterVariableFloat("E107DaysAVG", "Super E10 7-Tages Durchschnitt", "IPS2Tankerkoenig.Euro", 170);
 				$this->RegisterVariableFloat("E107DaysMax", "Super E10 7-Tages Maximum", "IPS2Tankerkoenig.Euro", 180);
-				$this->RegisterVariableBoolean("E10MinPrice", "E10 Minimum Preis", "~Switch", 210);
+				$this->RegisterVariableInteger("E10MinPrice", "E10 Minimum Preis", "IPS2Tankerkoenig.Price", 210);
 			}
 		}
 		
@@ -319,17 +324,17 @@
 			$SevenDaysMinPrice  = min($PriceArray);
 			SetValueFloat($MinID, $SevenDaysMinPrice);
 			If ($SevenDaysMinPrice < $Price) {
-				SetValueBoolean($MinPriceID, false);
+				SetValueInteger($MinPriceID, 2);
 			}
 			else {
-				SetValueBoolean($MinPriceID, true);
+				SetValueInteger($MinPriceID, 1);
 			}
         	}
         	else {
             		SetValueFloat($MaxID, 0);
 			SetValueFloat($AvgID, 0);
 			SetValueFloat($MinID, 0);
-			SetValueBoolean($MinPriceID, false);
+			SetValueInteger($MinPriceID, 0);
         	}
 	}
 	    
