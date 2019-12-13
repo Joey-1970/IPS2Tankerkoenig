@@ -324,7 +324,7 @@
 			SetValueFloat($AvgID, array_sum($PriceArray)/count($PriceArray));
 			$SevenDaysMinPrice  = min($PriceArray);
 			SetValueFloat($MinID, $SevenDaysMinPrice);
-			If ($SevenDaysMinPrice < $Price) {
+			If (($SevenDaysMinPrice + 0.01) < $Price) {
 				SetValueInteger($MinPriceID, 3);
 			}
 			elseIf (($SevenDaysMinPrice + 0.01) == $Price) {
