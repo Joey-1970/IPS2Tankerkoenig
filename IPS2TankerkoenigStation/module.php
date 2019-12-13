@@ -31,10 +31,11 @@
 		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 1, "Geöffnet", "LockOpen", 0x00FF00);
 		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.State", 2, "Geschlossen", "LockClosed", 0xFF0000);
 		
-		$this->RegisterProfileInteger("IPS2Tankerkoenig.Price", "Information", "", "", 0, 2, 1);
+		$this->RegisterProfileInteger("IPS2Tankerkoenig.Price", "Information", "", "", 0, 3, 1);
 		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 0, "Unbekannt", "Information", -1);
 		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 1, "Ideal", "Ok", 0x00FF00);
-		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 2, "Normal", "Close", 0xFF0000);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 2, "Fast Ideal", "Ok", 0xFFBF00);
+		IPS_SetVariableProfileAssociation("IPS2Tankerkoenig.Price", 3, "Normal", "Close", 0xFF0000);
 		
 		// Status-Variablen anlegen
 		$this->RegisterVariableString("PetrolStation", "Tankstelle", "~HTMLBox", 10);
@@ -324,6 +325,9 @@
 			$SevenDaysMinPrice  = min($PriceArray);
 			SetValueFloat($MinID, $SevenDaysMinPrice);
 			If ($SevenDaysMinPrice < $Price) {
+				SetValueInteger($MinPriceID, 3);
+			}
+			elseIf (($SevenDaysMinPrice + 1.0) == $Price) {
 				SetValueInteger($MinPriceID, 2);
 			}
 			else {
