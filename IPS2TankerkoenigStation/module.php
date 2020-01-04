@@ -316,22 +316,30 @@
 	{
 		$LoggingArray = @AC_GetLoggedValues(IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0], $InstanceID, time()- (3600 * 24 * 7), time(), 0); 
         	If (is_array($LoggingArray)) {
-            		$PriceArray = array();
-            		foreach ($LoggingArray as $Data) {
-                		$PriceArray[] = $Data["Value"];
-            		}
-            		SetValueFloat($MaxID, max($PriceArray));
-			SetValueFloat($AvgID, array_sum($PriceArray)/count($PriceArray));
-			$SevenDaysMinPrice  = min($PriceArray);
-			SetValueFloat($MinID, $SevenDaysMinPrice);
-			If (($SevenDaysMinPrice + 0.01) < $Price) {
-				SetValueInteger($MinPriceID, 3);
-			}
-			elseIf (($SevenDaysMinPrice + 0.01) == $Price) {
-				SetValueInteger($MinPriceID, 2);
+            		If (count($LoggingArray) > 0) {
+				$PriceArray = array();
+				foreach ($LoggingArray as $Data) {
+					$PriceArray[] = $Data["Value"];
+				}
+				SetValueFloat($MaxID, max($PriceArray));
+				SetValueFloat($AvgID, array_sum($PriceArray)/count($PriceArray));
+				$SevenDaysMinPrice  = min($PriceArray);
+				SetValueFloat($MinID, $SevenDaysMinPrice);
+				If (($SevenDaysMinPrice + 0.01) < $Price) {
+					SetValueInteger($MinPriceID, 3);
+				}
+				elseIf (($SevenDaysMinPrice + 0.01) == $Price) {
+					SetValueInteger($MinPriceID, 2);
+				}
+				else {
+					SetValueInteger($MinPriceID, 1);
+				}
 			}
 			else {
-				SetValueInteger($MinPriceID, 1);
+				SetValueFloat($MaxID, 0);
+				SetValueFloat($AvgID, 0);
+				SetValueFloat($MinID, 0);
+				SetValueInteger($MinPriceID, 0);
 			}
         	}
         	else {
