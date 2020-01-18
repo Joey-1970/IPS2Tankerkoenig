@@ -11,6 +11,7 @@
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');  
 		$this->RegisterPropertyFloat("Radius", 5.0);
+		$this->RegisterPropertyInteger("Category", 0);  
         }
  	
 	public function GetConfigurationForm() 
@@ -25,6 +26,7 @@
 		$arrayElements[] = array("type" => "SelectLocation", "name" => "Location", "caption" => "Region");
 		$arrayElements[] = array("type" => "Label", "label" => "Radius (gemäß Tankerkönig.de Maximum 25 km)");
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Radius", "caption" => "Radius (km)", "digits" => 1);
+		$arrayElements[] = array("type" => "SelectCategory", "name" => "Category", "caption" => "Zielkategorie");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arraySort = array();
 		$arraySort = array("column" => "Brand", "direction" => "ascending");
@@ -35,6 +37,17 @@
 		$arrayColumns[] = array("caption" => "Strasse", "name" => "Street", "width" => "200px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Ort", "name" => "Place", "width" => "auto", "visible" => true);
 		
+		$Category = $this->ReadPropertyInteger("Category");
+		$RootNames = [];
+		$RootId = $Category;
+		while ($RootId != 0) {
+		    	if ($RootId != 0) {
+				$RootNames[] = IPS_GetName($RootId);
+		    	}
+		    	$RootId = IPS_GetParent($RootId);
+			}
+		$RootNames = array_reverse($RootNames);
+		
 		$StationArray = array();
 		If ($this->HasActiveParent() == true) {
 			$StationArray = unserialize($this->GetData());
@@ -42,10 +55,10 @@
 		$arrayValues = array();
 		for ($i = 0; $i < Count($StationArray); $i++) {
 			$arrayCreate = array();
-			$arrayCreate[] = array("moduleID" => "{47286CAD-187A-6D88-89F0-BDA50CBF712F}", 
+			$arrayCreate[] = array("moduleID" => "{47286CAD-187A-6D88-89F0-BDA50CBF712F}", "location" => $RootNames, 
 					       "configuration" => array("StationID" => $StationArray[$i]["StationsID"], "Timer_1" => 10));
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Street" => $StationArray[$i]["Street"],
-					       "Place" => $StationArray[$i]["Place"], "instanceID" => $StationArray[$i]["InstanceID"], 
+					       "Place" => $StationArray[$i]["Place"], "name" => $Values["Name"], "instanceID" => $StationArray[$i]["InstanceID"], 
 					       "create" => $arrayCreate);
 		}
 		
