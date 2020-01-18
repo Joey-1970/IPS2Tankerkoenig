@@ -58,7 +58,7 @@
 			$arrayCreate[] = array("moduleID" => "{47286CAD-187A-6D88-89F0-BDA50CBF712F}", "location" => $RootNames, 
 					       "configuration" => array("StationID" => $StationArray[$i]["StationsID"], "Timer_1" => 10));
 			$arrayValues[] = array("Brand" => $StationArray[$i]["Brand"], "Name" => $StationArray[$i]["Name"], "Street" => $StationArray[$i]["Street"],
-					       "Place" => $StationArray[$i]["Place"], "name" => $Values["Name"], "instanceID" => $StationArray[$i]["InstanceID"], 
+					       "Place" => $StationArray[$i]["Place"], "name" => $StationArray[$i]["Name"], "instanceID" => $StationArray[$i]["InstanceID"], 
 					       "create" => $arrayCreate);
 		}
 		
