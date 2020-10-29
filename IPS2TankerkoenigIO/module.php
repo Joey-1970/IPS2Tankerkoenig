@@ -65,9 +65,10 @@
 				$Long = floatval($data->Long);
 				$Radius = floatval($data->Radius);
 				$this->SendDebug("GetAreaInformation", $Lat.", ".$Long.", ".$Radius, 0);
-	 			$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&rad=".$Radius."&sort=dist&type=all&apikey=".$ApiKey);
-				If ($Result == false) {
+	 			$Result = @file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&rad=".$Radius."&sort=dist&type=all&apikey=".$ApiKey);
+				If ($Result === false) {
 					$this->SetStatus(202);
+					$this->SendDebug("GetAreaInformation", "Es ist ein Fehler bei der Datenermittlung aufgetreten!", 0);
 				}
 				else {
 					$this->SetStatus(102);
@@ -77,9 +78,10 @@
 				$ApiKey = $this->ReadPropertyString("ApiKey");
 				$StationID = $data->StationID;
 				$this->SendDebug("GetDetailInformation", $StationID, 0);
-				$Result = file_get_contents ("https://creativecommons.tankerkoenig.de/json/detail.php?id=".$StationID."&apikey=".$ApiKey);
-				If ($Result == false) {
+				$Result = @file_get_contents ("https://creativecommons.tankerkoenig.de/json/detail.php?id=".$StationID."&apikey=".$ApiKey);
+				If ($Result === false) {
 					$this->SetStatus(202);
+					$this->SendDebug("GetDetailInformation", "Es ist ein Fehler bei der Datenermittlung aufgetreten!", 0);
 				}
 				else {
 					$this->SetStatus(102);
