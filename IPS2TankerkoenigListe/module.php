@@ -71,8 +71,8 @@
 		$arrayOptions = array();
 		$arrayOptions[] = array("label" => "Entfernung", "value" => "dist");
 		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "diesel");
-		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "e5");
-		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "e10");
+		$arrayOptions[] = array("label" => "E5 Preis", "value" => "e5");
+		$arrayOptions[] = array("label" => "E10 Preis", "value" => "e10");
 		$arrayElements[] = array("type" => "Select", "name" => "Sorting", "caption" => "Sortierung", "options" => $arrayOptions );
 		
 		$arrayOptions = array();
