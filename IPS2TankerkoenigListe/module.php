@@ -71,6 +71,8 @@
 		$arrayOptions = array();
 		$arrayOptions[] = array("label" => "Entfernung", "value" => "dist");
 		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "diesel");
+		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "e5");
+		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "e10");
 		$arrayElements[] = array("type" => "Select", "name" => "Sorting", "caption" => "Sortierung", "options" => $arrayOptions );
 		
 		$arrayOptions = array();
@@ -248,6 +250,17 @@
 		$table .= '<th class="tg-kv4b">Details<br></th>';
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
+		
+		// Sortieren der Einträge
+		$Sorting = $this->ReadPropertyString("Sorting");
+		$Order = $this->ReadPropertyString("Order");
+		If ($Order == "SORT_ASC") {
+			array_multisort(array_column($ResultArray->stations, $Sorting), SORT_ASC, $ResultArray->stations);
+		}
+		elseif ($Order == "SORT_DESC") {
+			array_multisort(array_column($ResultArray->stations, $Sorting), SORT_DESC, $ResultArray->stations);
+		}
+		
 		$i = 0;
 		foreach($ResultArray->stations as $Stations) {
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
