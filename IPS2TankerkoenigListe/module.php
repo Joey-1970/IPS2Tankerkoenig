@@ -24,6 +24,8 @@
 		$this->RegisterPropertyBoolean("E10", true);
 		$this->RegisterPropertyInteger("MaxStations", 25);
 		$this->RegisterPropertyBoolean("ShowOnlyOpen", true);
+		$this->RegisterPropertyString("Sorting", "dist");
+		$this->RegisterPropertyString("Order", "SORT_ASC");
 		
 		// Webhook einrichten
 		$this->RegisterHook("/hook/IPS2TankerkoenigListe_".$this->InstanceID);
@@ -65,6 +67,18 @@
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "ShowOnlyOpen", "caption" => "Nur geöffnete Tankstellen anzeigen"); 
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "MaxStations", "caption" => "Anzahl max. anzuzeigender Tankstellen");
+		
+		$arrayOptions = array();
+		$arrayOptions[] = array("label" => "Entfernung", "value" => "dist");
+		$arrayOptions[] = array("label" => "Diesel Preis", "value" => "diesel");
+		$arrayElements[] = array("type" => "Select", "name" => "Sorting", "caption" => "Sortierung", "options" => $arrayOptions );
+		
+		$arrayOptions = array();
+		$arrayOptions[] = array("label" => "Aufsteigend", "value" => "SORT_ASC");
+		$arrayOptions[] = array("label" => "Absteigend", "value" => "SORT_DESC");
+		$arrayElements[] = array("type" => "Select", "name" => "Order", "caption" => "Reihenfolge", "options" => $arrayOptions );
+		
+		
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "Button", "caption" => "Tankerkönig-API", "onClick" => "echo 'https://creativecommons.tankerkoenig.de/';");
 
