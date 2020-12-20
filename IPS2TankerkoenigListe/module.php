@@ -19,6 +19,8 @@
 		$this->RegisterPropertyFloat("Radius", 5.0);
 		$this->RegisterPropertyInteger("Timer_1", 10);
 		$this->RegisterTimer("Timer_1", 0, 'I2TListe_GetDataUpdate($_IPS["TARGET"]);');
+		$this->RegisterPropertyBoolean("Brand", true);
+		$this->RegisterPropertyBoolean("Details", true);
 		$this->RegisterPropertyBoolean("Diesel", true);
 		$this->RegisterPropertyBoolean("E5", true);
 		$this->RegisterPropertyBoolean("E10", true);
@@ -60,10 +62,12 @@
 		$arrayElements[] = array("type" => "Label", "label" => "Aktualisierung (gemäß Tankerkönig.de Minimum 10 Minuten)");
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "Timer_1", "caption" => "min");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
-		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Sorten");
+		$arrayElements[] = array("type" => "Label", "label" => "Anzuzeigende Spalten");
+		$arrayElements[] = array("type" => "CheckBox", "name" => "Brand", "caption" => "Marke"); 
 		$arrayElements[] = array("type" => "CheckBox", "name" => "Diesel", "caption" => "Diesel"); 
 		$arrayElements[] = array("type" => "CheckBox", "name" => "E5", "caption" => "Super E5");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "E10", "caption" => "Super E10");
+		$arrayElements[] = array("type" => "CheckBox", "name" => "Details", "caption" => "Details");
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		$arrayElements[] = array("type" => "CheckBox", "name" => "ShowOnlyOpen", "caption" => "Nur geöffnete Tankstellen anzeigen"); 
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "MaxStations", "caption" => "Anzahl max. anzuzeigender Tankstellen");
@@ -232,7 +236,9 @@
 		$table .= "</style>";
 		$table .= '<table class="tg">';
 		$table .= "<tr>";
-		$table .= '<th class="tg-kv4b">Marke</th>';
+		If ($this->ReadPropertyBoolean("Brand") == true) { 
+			$table .= '<th class="tg-kv4b">Marke</th>';
+		}
 		$table .= '<th class="tg-kv4b">Name</th>';
 		$table .= '<th class="tg-kv4b">Ort<br></th>';
 		If ($this->ReadPropertyBoolean("Diesel") == true) { 
@@ -247,7 +253,9 @@
         	If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) { 
 			$table .= '<th class="tg-kv4b">Offen<br></th>';
 		}
-		$table .= '<th class="tg-kv4b">Details<br></th>';
+		If ($this->ReadPropertyBoolean("Details") == true) { 
+			$table .= '<th class="tg-kv4b">Details<br></th>';
+		}
 		//$table .= '<th class="tg-kv4b">Ort<br></th>';
 		$table .= '</tr>';
 		
@@ -265,7 +273,9 @@
 		foreach($ResultArray->stations as $Stations) {
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
 				$table .= '<tr>';
-				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+				If ($this->ReadPropertyBoolean("Brand") == true) { 
+					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+				}
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
@@ -297,14 +307,18 @@
 				} else {
 					$table .= '<td class="tg-611x">'."Nein".'</td>';
 				}
-				$StationID = $Stations->id;
-				$table .= '<td class="tg-611x"> <button type="button" alt="Details" onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"id="ID">...</button> </td>';
+				If ($this->ReadPropertyBoolean("Details") == true) { 
+					$StationID = $Stations->id;
+					$table .= '<td class="tg-611x"> <button type="button" alt="Details" onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"id="ID">...</button> </td>';
+				}
 				$table .= '</tr>';
 			}
 			else {
 				If ($Stations->isOpen == true) {
 					$table .= '<tr>';
-					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+					If ($this->ReadPropertyBoolean("Brand") == true) { 
+						$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+					}
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
 					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
 					If ($this->ReadPropertyBoolean("Diesel") == true) {
@@ -331,8 +345,10 @@
 							$table .= $Font.$Stations->e10.'</font> </td>';
 						}
 					}
-					$StationID = $Stations->id;
-					$table .= '<td class="tg-611x"> <button type="button" alt="Details" onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"id="ID">...</button> </td>';
+					If ($this->ReadPropertyBoolean("Details") == true) { 
+						$StationID = $Stations->id;
+						$table .= '<td class="tg-611x"> <button type="button" alt="Details" onclick="window.xhrGet=function xhrGet(o) {var HTTP = new XMLHttpRequest();HTTP.open(\'GET\',o.url,true);HTTP.send();};window.xhrGet({ url: \'hook/IPS2TankerkoenigListe_'.$this->InstanceID.'?StationID='.$StationID.'\' })"id="ID">...</button> </td>';
+					}
 					$table .= '</tr>';
 				}
 			}
