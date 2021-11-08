@@ -274,10 +274,10 @@
 			If ($this->ReadPropertyBoolean("ShowOnlyOpen") == false) {
 				$table .= '<tr>';
 				If ($this->ReadPropertyBoolean("Brand") == true) { 
-					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+					$table .= '<td class="tg-611x">'.$Stations->brand.'</td>';
 				}
-				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
-				$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
+				$table .= '<td class="tg-611x">'.$Stations->name.'</td>';
+				$table .= '<td class="tg-611x">'.$Stations->place.'</td>';
 				If ($this->ReadPropertyBoolean("Diesel") == true) {
 					If (floatval($Stations->diesel) == $Diesel) {
 						$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel.'</font> </td>';
@@ -317,10 +317,10 @@
 				If ($Stations->isOpen == true) {
 					$table .= '<tr>';
 					If ($this->ReadPropertyBoolean("Brand") == true) { 
-						$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->brand)).'</td>';
+						$table .= '<td class="tg-611x">'.$Stations->brand.'</td>';
 					}
-					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->name)).'</td>';
-					$table .= '<td class="tg-611x">'.ucwords(strtolower($Stations->place)).'</td>';
+					$table .= '<td class="tg-611x">'.$Stations->name.'</td>';
+					$table .= '<td class="tg-611x">'.$Stations->place.'</td>';
 					If ($this->ReadPropertyBoolean("Diesel") == true) {
 						If (floatval($Stations->diesel) == $Diesel) {
 							$table .= $Font.'<font color='.$ColorCode.'>'.$Stations->diesel.'</font> </td>';
@@ -407,16 +407,16 @@
 		$table .= "</style>";
 		$table .= '<table class="tg">';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->brand)).'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->brand.'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->name)).'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->name.'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->street))." ".$ResultArray->station->houseNumber.'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->street." ".$ResultArray->station->houseNumber.'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.$ResultArray->station->postCode." ".ucwords(strtolower($ResultArray->station->place)).'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->postCode." ".$ResultArray->station->place.'</td>';
 		$table .= '</tr>';
 		If (boolval($ResultArray->station->wholeDay) == true) {
 			$table .= '<tr>';
