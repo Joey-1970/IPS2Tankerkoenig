@@ -196,16 +196,16 @@
 		$table .= "</style>";
 		$table .= '<table class="tg">';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->brand)).'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->brand.'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->name)).'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->name.'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.ucwords(strtolower($ResultArray->station->street))." ".$ResultArray->station->houseNumber.'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->street." ".$ResultArray->station->houseNumber.'</td>';
 		$table .= '</tr>';
 		$table .= '<tr>';
-		$table .= '<td class="tg-611x">'.$ResultArray->station->postCode." ".ucwords(strtolower($ResultArray->station->place)).'</td>';
+		$table .= '<td class="tg-611x">'.$ResultArray->station->postCode." ".$ResultArray->station->place.'</td>';
 		$table .= '</tr>';
 		If (boolval($ResultArray->station->wholeDay) == true) {
 			$table .= '<tr>';
