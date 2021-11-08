@@ -84,8 +84,6 @@
 					$this->SendDebug("GetDetailInformation", "Es ist ein Fehler bei der Datenermittlung aufgetreten!", 0);
 				}
 				else {
-					$Result = mb_convert_encoding($Result, 'UTF-8', mb_detect_encoding($Result, 'UTF-8, ISO-8859-1', true));
-					//$Result = mb_convert_encoding($Result, 'HTML-ENTITIES', "UTF-8");
 					$this->SetStatus(102);
 				}
 				break;
