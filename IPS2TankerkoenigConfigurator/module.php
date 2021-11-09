@@ -112,10 +112,17 @@
 				
 				$i = 0;
 				foreach($ResultArray->stations as $Stations) {
+					/*
 					$StationArray[$i]["Brand"] = ucwords(strtolower($Stations->brand));
 					$StationArray[$i]["Name"] = ucwords(strtolower($Stations->name));
 					$StationArray[$i]["Street"] = ucwords(strtolower($Stations->street));
 					$StationArray[$i]["Place"] = ucwords(strtolower($Stations->place));
+					*/
+					
+					$StationArray[$i]["Brand"] = $Stations->brand;
+					$StationArray[$i]["Name"] = $Stations->name;
+					$StationArray[$i]["Street"] = $Stations->street;
+					$StationArray[$i]["Place"] = $Stations->place;
 					$StationArray[$i]["StationsID"] = $Stations->id;
 					$StationArray[$i]["InstanceID"] = $this->GetStationInstanceID($Stations->id);
 
