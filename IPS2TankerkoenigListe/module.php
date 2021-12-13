@@ -7,6 +7,7 @@
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
+		$this->RegisterMessage(0, IPS_KERNELSTARTED);
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');  
 		$this->RegisterPropertyFloat("Radius", 5.0);
@@ -92,14 +93,12 @@
         {
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
-		
-		$this->RegisterMessage($this->InstanceID, 10103);
-		
 		SetValueString($this->GetIDForIdent("PetrolStationDetail"), "");
 		
 		$this->SetStatus(102);
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
-		If ($this->ReadPropertyFloat("Radius") > 0) {
+		
+		If ((IPS_GetKernelRunlevel() == KR_READY) AND ($this->ReadPropertyFloat("Radius") > 0)) {
 			$this->GetDataUpdate();
 		}
 		else {
@@ -110,10 +109,14 @@
 	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     	{
  		switch ($Message) {
-			case 10103:
-				$this->ApplyChanges();
+			case IPS_KERNELSTARTED:
+				If ($this->ReadPropertyFloat("Radius") > 0) {
+					$this->GetDataUpdate();
+				}
+				else {
+					$this->SendDebug("GetDataUpdate", "Radius <= 0!", 0);
+				}
 				break;
-			
 		}
     	}          
 	    
