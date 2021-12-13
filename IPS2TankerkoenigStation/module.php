@@ -7,6 +7,7 @@
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
+		$this->RegisterMessage(0, IPS_KERNELSTARTED);
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("StationID", "");
 		$this->RegisterPropertyInteger("Timer_1", 10);
@@ -88,7 +89,6 @@
         {
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
-		$this->RegisterMessage($this->InstanceID, 10103);
 		$this->SetStatus(102);
 		SetValueInteger($this->GetIDForIdent("State"), 1);
 		
@@ -124,7 +124,7 @@
 		}
 		
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
-		If ($this->isValidUuid($this->ReadPropertyString("StationID")) == true) {
+		If ((IPS_GetKernelRunlevel() == KR_READY) AND ($this->isValidUuid($this->ReadPropertyString("StationID")) == true)) {
 			$this->GetDataUpdate();
 		}
 		else {
@@ -135,8 +135,13 @@
 	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     	{
  		switch ($Message) {
-			case 10103:
-				$this->ApplyChanges();
+			case IPS_KERNELSTARTED:
+				If ($this->isValidUuid($this->ReadPropertyString("StationID")) == true) {
+					$this->GetDataUpdate();
+				}
+				else {
+					$this->SendDebug("GetDataUpdate", "Keine gueltige Tankstellen ID verfügbar!", 0);
+				}
 				break;
 			
 		}
