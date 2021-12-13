@@ -8,6 +8,7 @@
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
+		$this->RegisterMessage(0, IPS_KERNELSTARTED);
 		$this->ConnectParent("{66FD608F-6C67-6011-25E3-B9ED4C3E1590}");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');  
 		$this->RegisterPropertyFloat("Radius", 5.0);
@@ -76,7 +77,7 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 		
-		If (IPS_GetKernelRunlevel() == 10103) {	
+		If (IPS_GetKernelRunlevel() == KR_READY) {	
 			If ($this->HasActiveParent() == true) {
 				$this->SetStatus(102);
 			}
@@ -85,6 +86,21 @@
 			}
 		}
 	}
+	
+	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    	{
+		switch ($Message) {
+			case IPS_KERNELSTARTED:
+				// IPS_KERNELSTARTED
+				If ($this->HasActiveParent() == true) {
+					$this->SetStatus(102);
+				}
+				else {
+					$this->SetStatus(104);
+				}
+				break;
+		}
+    	}         
 	    
 	// Beginn der Funktionen
 	private function GetData()
