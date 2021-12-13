@@ -8,6 +8,7 @@
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
+		$this->RegisterMessage(0, IPS_KERNELSTARTED);
 		$this->RegisterPropertyBoolean("Open", false);
  	    	$this->RegisterPropertyString("ApiKey", "");
         }
@@ -36,9 +37,8 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 
-		If (IPS_GetKernelRunlevel() == 10103) {	
-		
-			If ($this->ReadPropertyBoolean("Open") == true) {
+		If (IPS_GetKernelRunlevel() == KR_READY) {	
+			If ((IPS_GetKernelRunlevel() == KR_READY) AND ($this->ReadPropertyBoolean("Open") == true)) {
 				$ApiKey = $this->ReadPropertyString("ApiKey");
 				If ($this->isValidUuid($ApiKey)) {
 					$this->SetStatus(102);
@@ -53,6 +53,28 @@
 		}
 	}
 	
+	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    	{
+		switch ($Message) {
+			case IPS_KERNELSTARTED:
+				// IPS_KERNELSTARTED
+				If ($this->ReadPropertyBoolean("Open") == true) {
+					$ApiKey = $this->ReadPropertyString("ApiKey");
+					If ($this->isValidUuid($ApiKey)) {
+						$this->SetStatus(102);
+					}
+					else {
+						$this->SetStatus(104);
+					}
+				}
+				else {
+					$this->SetStatus(104);
+				}
+				break;
+		}
+    	}         
+	    
+	    
 	public function ForwardData($JSONString) 
 	 {
 	 	// Empfangene Daten von der Device Instanz
