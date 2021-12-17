@@ -95,13 +95,18 @@
             	parent::ApplyChanges();
 		SetValueString($this->GetIDForIdent("PetrolStationDetail"), "");
 		
-		$this->SetStatus(102);
 		$this->SetTimerInterval("Timer_1", $this->ReadPropertyInteger("Timer_1") * 1000 * 60);
 		
 		If ((IPS_GetKernelRunlevel() == KR_READY) AND ($this->ReadPropertyFloat("Radius") > 0)) {
+			If ($this->GetStatus() <> 102) {
+				$this->SetStatus(102);
+			}
 			$this->GetDataUpdate();
 		}
 		else {
+			If ($this->GetStatus() <> 104) {
+				$this->SetStatus(104);
+			}
 			$this->SendDebug("GetDataUpdate", "Radius <= 0!", 0);
 		}
 	}
@@ -111,9 +116,15 @@
  		switch ($Message) {
 			case IPS_KERNELSTARTED:
 				If ($this->ReadPropertyFloat("Radius") > 0) {
+					If ($this->GetStatus() <> 102) {
+						$this->SetStatus(102);
+					}
 					$this->GetDataUpdate();
 				}
 				else {
+					If ($this->GetStatus() <> 104) {
+						$this->SetStatus(104);
+					}
 					$this->SendDebug("GetDataUpdate", "Radius <= 0!", 0);
 				}
 				break;
@@ -132,12 +143,16 @@
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 			If ($Result <> false) {
-				$this->SetStatus(102);
+				If ($this->GetStatus() <> 102) {
+					$this->SetStatus(102);
+				}
 				$this->SendDebug("GetDataUpdate", $Result, 0);
 				$this->ShowResult($Result);
 			}
 			else {
-				$this->SetStatus(202);
+				If ($this->GetStatus() <> 202) {
+					$this->SetStatus(202);
+				}
 				$this->SendDebug("GetDataUpdate", "Fehler bei der Datenermittlung!", 0);
 			}
 		}
@@ -379,12 +394,16 @@
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetDetailInformation", "InstanceID" => $this->InstanceID, "StationID" => $StationID)));
 			If ($Result <> false) {
-				$this->SetStatus(102);
+				If ($this->GetStatus() <> 102) {
+					$this->SetStatus(102);
+				}
 				$this->SendDebug("GetStationDetails", $Result, 0);
 				$this->ShowDetails($Result);
 			}
 			else {
-				$this->SetStatus(202);
+				If ($this->GetStatus() <> 202) {
+					$this->SetStatus(202);
+				}
 				$this->SendDebug("GetStationDetails", "Fehler bei der Datenermittlung!", 0);
 			}
 		}
