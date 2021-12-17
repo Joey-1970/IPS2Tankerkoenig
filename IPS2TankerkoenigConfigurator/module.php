@@ -79,10 +79,14 @@
 		
 		If (IPS_GetKernelRunlevel() == KR_READY) {	
 			If ($this->HasActiveParent() == true) {
-				$this->SetStatus(102);
+				If ($this->GetStatus() <> 102) {
+					$this->SetStatus(102);
+				}
 			}
 			else {
-				$this->SetStatus(104);
+				If ($this->GetStatus() <> 104) {
+					$this->SetStatus(104);
+				}
 			}
 		}
 	}
@@ -93,10 +97,14 @@
 			case IPS_KERNELSTARTED:
 				// IPS_KERNELSTARTED
 				If ($this->HasActiveParent() == true) {
-					$this->SetStatus(102);
+					If ($this->GetStatus() <> 102) {
+						$this->SetStatus(102);
+					}
 				}
 				else {
-					$this->SetStatus(104);
+					If ($this->GetStatus() <> 104) {
+						$this->SetStatus(104);
+					}
 				}
 				break;
 		}
@@ -115,7 +123,9 @@
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{6ADD0473-D761-A2BF-63BE-CFE279089F5A}", 
 				"Function" => "GetAreaInformation", "InstanceID" => $this->InstanceID, "Lat" => $Lat, "Long" => $Long, "Radius" => $Radius )));
 			If ($Result <> false) {
-				$this->SetStatus(102);
+				If ($this->GetStatus() <> 102) {
+					$this->SetStatus(102);
+				}
 				$this->SendDebug("GetData", $Result, 0);
 				//$this->ShowResult($Result);
 				$ResultArray = array();
@@ -148,7 +158,9 @@
 				
 			}
 			else {
-				$this->SetStatus(202);
+				If ($this->GetStatus() <> 202) {
+					$this->SetStatus(202);
+				}
 				$this->SendDebug("GetData", "Fehler bei der Datenermittlung!", 0);
 			}
 		}
