@@ -41,14 +41,20 @@
 			If ((IPS_GetKernelRunlevel() == KR_READY) AND ($this->ReadPropertyBoolean("Open") == true)) {
 				$ApiKey = $this->ReadPropertyString("ApiKey");
 				If ($this->isValidUuid($ApiKey)) {
-					$this->SetStatus(102);
+					If ($this->GetStatus() <> 102) {
+						$this->SetStatus(102);
+					}
 				}
 				else {
-					$this->SetStatus(104);
+					If ($this->GetStatus() <> 104) {
+						$this->SetStatus(104);
+					}
 				}
 			}
 			else {
-				$this->SetStatus(104);
+				If ($this->GetStatus() <> 104) {
+					$this->SetStatus(104);
+				}
 			}
 		}
 	}
@@ -61,14 +67,20 @@
 				If ($this->ReadPropertyBoolean("Open") == true) {
 					$ApiKey = $this->ReadPropertyString("ApiKey");
 					If ($this->isValidUuid($ApiKey)) {
-						$this->SetStatus(102);
+						If ($this->GetStatus() <> 102) {
+							$this->SetStatus(102);
+						}
 					}
 					else {
-						$this->SetStatus(104);
+						If ($this->GetStatus() <> 104) {
+							$this->SetStatus(104);
+						}
 					}
 				}
 				else {
-					$this->SetStatus(104);
+					If ($this->GetStatus() <> 104) {
+						$this->SetStatus(104);
+					}
 				}
 				break;
 		}
@@ -89,11 +101,15 @@
 				$this->SendDebug("GetAreaInformation", $Lat.", ".$Long.", ".$Radius, 0);
 	 			$Result = @file_get_contents ("https://creativecommons.tankerkoenig.de/json/list.php?lat=".$Lat."&lng=".$Long."&rad=".$Radius."&sort=dist&type=all&apikey=".$ApiKey);
 				If ($Result === false) {
-					$this->SetStatus(202);
+					If ($this->GetStatus() <> 202) {
+						$this->SetStatus(202);
+					}
 					$this->SendDebug("GetAreaInformation", "Es ist ein Fehler bei der Datenermittlung aufgetreten!", 0);
 				}
 				else {
-					$this->SetStatus(102);
+					If ($this->GetStatus() <> 102) {
+						$this->SetStatus(102);
+					}
 				}
 				break;
 			case "GetDetailInformation":
@@ -102,11 +118,15 @@
 				$this->SendDebug("GetDetailInformation", $StationID, 0);
 				$Result = @file_get_contents ("https://creativecommons.tankerkoenig.de/json/detail.php?id=".$StationID."&apikey=".$ApiKey);
 				If ($Result === false) {
-					$this->SetStatus(202);
+					If ($this->GetStatus() <> 202) {
+						$this->SetStatus(202);
+					}
 					$this->SendDebug("GetDetailInformation", "Es ist ein Fehler bei der Datenermittlung aufgetreten!", 0);
 				}
 				else {
-					$this->SetStatus(102);
+					If ($this->GetStatus() <> 102) {
+						$this->SetStatus(102);
+					}
 				}
 				break;
 			case "DataCorrection":
@@ -116,10 +136,14 @@
 				$Correction = $data->Value;
 				$Result = $this->sendComplaint($StationID, $complaintType, $Correction);
 				If ($Result == false) {
-					$this->SetStatus(202);
+					If ($this->GetStatus() <> 202) {
+						$this->SetStatus(202);
+					}
 				}
 				else {
-					$this->SetStatus(102);
+					If ($this->GetStatus() <> 102) {
+						$this->SetStatus(102);
+					}
 				}
 				break;
 		}
